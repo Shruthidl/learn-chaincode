@@ -243,8 +243,10 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 
 
  //Get number of LOCs in the system
-    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub) (uint, error){
-        return counter, nil;
+    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub) ([]byte, error){
+        s := strconv.Itoa(counter) ;
+        ret_s := []byte(s);
+        return ret_s, nil;
     }
 
 
