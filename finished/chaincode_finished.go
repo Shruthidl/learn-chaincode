@@ -30,6 +30,23 @@ type SimpleChaincode struct {
 var key string ;
 var value string ;
 
+type loc struct  {
+        requester_name string;
+        beneficiary_name  string;
+        amount  string;
+        expiry_date string;
+       	status string;
+        advising_bank string;
+        document_hash string;
+        loc_filename string;
+        contract_hash string;
+        bol_hash string;
+    }
+   
+var counter uint = 0;
+var LOCs map[uint]*loc;
+
+
 func main() {
 	err := shim.Start(new(SimpleChaincode))
 	if err != nil {
@@ -100,6 +117,28 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 	}
 	return nil, nil
 }
+
+// Adding LOCs 
+func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, beneficiary_name, amount, expiry_date, document_hash,loc_filename, contract_hash,  bol_hash string) ([]byte,error){
+  
+     counter = counter+1;
+     LOCs[counter] =  &loc{};
+     LOCs[counter].requester_name = requester_name;
+     LOCs[counter].beneficiary_name= beneficiary_name;
+     LOCs[counter].amount= amount;
+     LOCs[counter].expiry_date= expiry_date;
+     LOCs[counter].status= "requested";
+     LOCs[counter].advising_bank = "none";
+     LOCs[counter].document_hash= document_hash;
+     LOCs[counter].loc_filename= loc_filename;
+     LOCs[counter].contract_hash= contract_hash;
+     LOCs[counter].bol_hash = bol_hash ;
+     //LOCs [counter]= loc{requester_name,beneficiary_name,amount,expiry_date,"requested","none",document_hash,loc_filename,contract_hash, bol_hash};
+     fmt.Println(LOCs [counter].requester_name);
+     return nil, nil;
+
+}
+
 
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
