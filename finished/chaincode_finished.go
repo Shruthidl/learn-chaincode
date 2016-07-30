@@ -28,6 +28,7 @@ type SimpleChaincode struct {
 }
 
 var key string ;
+var value string ;
 
 func main() {
 	err := shim.Start(new(SimpleChaincode))
@@ -80,7 +81,7 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 
 // write - invoke function to write key/value pair
 func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
-	var value string
+	
 	var err error
 	fmt.Println("running write()")
 
