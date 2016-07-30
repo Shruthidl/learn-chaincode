@@ -78,7 +78,7 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
 	} else if function == "write" {
 		return t.write(stub, args)
 	} else if function == "addLoc" {
-		return t.addLoc(stub, args)
+		return t.addLoc(stub, args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7])
 	}
 	
 	fmt.Println("invoke did not find func: " + function)
