@@ -45,7 +45,7 @@ type loc struct  {
     }
    
 var counter int = 0;
-var LOCs map[uint]*loc;
+var LOCs map[int]*loc;
 
 
 func main() {
@@ -150,7 +150,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 }
 
 // Return specific LOC in the system
-    func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , location uint) ([]byte,error) {
+    func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , location int) ([]byte,error) {
 	b := make([]byte, 300)
              tracker:= 0;
 
