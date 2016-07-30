@@ -95,9 +95,9 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	if function == "read" { //read a variable
 		return t.read(stub, args)
 	} else if function == "getLoc" {
-		i, err := strconv.Atoi(args[0])
+		i := strconv.Atoi(args[0])
 		return t.getLoc(stub, i)
-	} else if function == "getNumberOfLocs" {
+	} else if function == getNumberOfLocs {
 		return t.getNumberOfLocs(stub)
 	}
 	
