@@ -44,7 +44,7 @@ type loc struct  {
         bol_hash string;
     }
    
-var counter uint = 0;
+var counter int = 0;
 var LOCs map[uint]*loc;
 
 
