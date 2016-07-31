@@ -127,6 +127,8 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 	if err != nil {
 		return nil, err
 	}
+	
+	
 	return nil, nil
 }
 
@@ -147,6 +149,15 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
      LOCs[counter].bol_hash = bol_hash ;
      //LOCs [counter]= loc{requester_name,beneficiary_name,amount,expiry_date,"requested","none",document_hash,loc_filename,contract_hash, bol_hash};
      fmt.Println(LOCs [counter].requester_name);
+     
+     err = stub.PutState(counter, LOCs[counter]) //write the variable into the chaincode state
+	if err != nil {
+		return nil, err
+	}
+	
+     err = stub.PutState("counter",counter);
+	
+	
      return nil, nil;
 
 }
@@ -246,9 +257,15 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 
  //Get number of LOCs in the system
     func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub) ([]byte, error){
-        s := strconv.Itoa(counter) ;
-        ret_s := []byte(s);
-        return ret_s, nil;
+    	valAsbytes, err := stub.GetState("counter");
+    	
+    	if err != nil {
+		return nil, err
+	}
+    	
+        //s := strconv.Itoa(counter) ;
+        //ret_s := []byte(s);
+        return valAsbytes, nil;
     }
 
 
