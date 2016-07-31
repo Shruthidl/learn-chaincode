@@ -150,12 +150,17 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
      //LOCs [counter]= loc{requester_name,beneficiary_name,amount,expiry_date,"requested","none",document_hash,loc_filename,contract_hash, bol_hash};
      fmt.Println(LOCs [counter].requester_name);
      
-     err = stub.PutState(counter, LOCs[counter]) //write the variable into the chaincode state
+     counter_s := strconv.Itoa(counter) ;
+     counter_b := []byte(counter_s);
+     
+     err = stub.PutState(counter_b, LOCs[counter].requester_name) //write the variable into the chaincode state
 	if err != nil {
 		return nil, err
 	}
+
+
 	
-     err = stub.PutState("counter",counter);
+     err = stub.PutState("counter",counter_b);
 	
 	
      return nil, nil;
