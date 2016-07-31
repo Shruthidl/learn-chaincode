@@ -134,6 +134,7 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 
 // Adding LOCs 
 func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, beneficiary_name, amount, expiry_date, document_hash,loc_filename, contract_hash,  bol_hash string) ([]byte,error){
+  var err error;
   
      counter = counter+1;
      LOCs[counter] =  &loc{};
