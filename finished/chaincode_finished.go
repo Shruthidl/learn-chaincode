@@ -142,8 +142,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     
      //fmt.Println(LOCs [counter].requester_name);
      
-    // counter_s := strconv.Itoa(counter) ;
-    // counter_b := []byte(counter_s);
+    counter_s := strconv.Itoa(counter) ;
+    counter_b := []byte(counter_s);
      
      //err = stub.PutState(counter_s, []byte(LOCs[counter].requester_name)) //write the variable into the chaincode state
      //	if err != nil {
@@ -151,8 +151,14 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     //	}
 
     //fmt.Println(counter_b);
+    
+      err = stub.PutState("counter",counter_b);
+
+     if err != nil {
+		return nil, err
+	}
 	
-     err = stub.PutState("counter",[]byte(args[0]));
+     err = stub.PutState("0_sender",[]byte(args[0]));
 
      if err != nil {
 		return nil, err
