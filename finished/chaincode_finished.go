@@ -102,7 +102,7 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	} else if function == "getNumberOfLocs" {
 		var m_key string;
 		m_key := "counter";
-		return t.getNumberOfLocs(stub, m_key);
+		return t.getNumberOfLocs(stub, [m_key]);
 	}
 	
 	fmt.Println("query did not find func: " + function)
