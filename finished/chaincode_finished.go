@@ -80,7 +80,7 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
 		return t.write(stub, args)
 	} else if function == "addLoc" {
 		fmt.Println("**** First argument in addLoc:****" + args[0])
-		return t.addLoc(stub, args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7])
+		return t.addLoc(stub, args)
 	}
 	
 	fmt.Println("invoke did not find func: " + function)
@@ -136,21 +136,21 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 }
 
 // Adding LOCs 
-func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, beneficiary_name, amount, expiry_date, document_hash,loc_filename, contract_hash,  bol_hash string) ([]byte,error){
+func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byte,error){
   var err error;
   
      counter = counter+1;
-     LOCs[counter] =  &loc{};
-     LOCs[counter].requester_name = requester_name;
-     LOCs[counter].beneficiary_name= beneficiary_name;
-     LOCs[counter].amount= amount;
-     LOCs[counter].expiry_date= expiry_date;
-     LOCs[counter].status= "requested";
-     LOCs[counter].advising_bank = "none";
-     LOCs[counter].document_hash= document_hash;
-     LOCs[counter].loc_filename= loc_filename;
-     LOCs[counter].contract_hash= contract_hash;
-     LOCs[counter].bol_hash = bol_hash ;
+   //  LOCs[counter] =  &loc{};
+   //  LOCs[counter].requester_name = requester_name;
+   //  LOCs[counter].beneficiary_name= beneficiary_name;
+   //  LOCs[counter].amount= amount;
+   //  LOCs[counter].expiry_date= expiry_date;
+   //  LOCs[counter].status= "requested";
+   //  LOCs[counter].advising_bank = "none";
+   //  LOCs[counter].document_hash= document_hash;
+   //  LOCs[counter].loc_filename= loc_filename;
+   //  LOCs[counter].contract_hash= contract_hash;
+   //  LOCs[counter].bol_hash = bol_hash ;
      //LOCs [counter]= loc{requester_name,beneficiary_name,amount,expiry_date,"requested","none",document_hash,loc_filename,contract_hash, bol_hash};
      fmt.Println(LOCs [counter].requester_name);
      
@@ -164,7 +164,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 
     fmt.Println(counter_b);
 	
-     err = stub.PutState("counter",[]byte("test"));
+     err = stub.PutState("counter",[]byte(args[0]));
 
      if err != nil {
 		return nil, err
