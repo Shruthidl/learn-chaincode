@@ -258,7 +258,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
  //Get number of LOCs in the system
     func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, args []string) ([]byte, error){
-    	valAsbytes, err := stub.GetState([]byte("counter"));
+    	valAsbytes, err := stub.GetState("counter");
     	
     	if err != nil {
 		return nil, err
