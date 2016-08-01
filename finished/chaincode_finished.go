@@ -100,7 +100,9 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 		return t.getLoc(stub, i)
 		 
 	} else if function == "getNumberOfLocs" {
-		return t.getNumberOfLocs(stub)
+		var m_key string;
+		m_key := "counter";
+		return t.getNumberOfLocs(stub, m_key);
 	}
 	
 	fmt.Println("query did not find func: " + function)
@@ -162,6 +164,10 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 
 	
      err = stub.PutState("counter",counter_b);
+
+     if err != nil {
+		return nil, err
+	}
 	
 	
      return nil, nil;
@@ -262,8 +268,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 
 
  //Get number of LOCs in the system
-    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub) ([]byte, error){
-    	valAsbytes, err := stub.GetState("counter");
+    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, args []string) ([]byte, error){
+    	valAsbytes, err := stub.GetState(args[0]);
     	
     	if err != nil {
 		return nil, err
