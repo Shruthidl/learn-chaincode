@@ -161,9 +161,9 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub,requester_name, benefi
 		return nil, err
 	}
 
-
+    fmt.Println(counter_b);
 	
-     err = stub.PutState("counter",counter_b);
+     err = stub.PutState("counter",[]byte("test"));
 
      if err != nil {
 		return nil, err
