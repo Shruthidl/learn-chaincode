@@ -138,6 +138,10 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byte,error){
   var err error;
   
+    valAsbytes, err := stub.GetState("counter");
+    
+     counter, err = Atoi(string(valAsbytes));
+  
      counter = counter+1;
     
      //fmt.Println(LOCs [counter].requester_name);
