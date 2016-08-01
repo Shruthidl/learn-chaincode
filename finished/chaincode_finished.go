@@ -101,9 +101,8 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 		return t.getLoc(stub, i)
 		 
 	} else if function == "getNumberOfLocs" {
-		var m_key string;
-		m_key = "counter";
-		return t.getNumberOfLocs(stub, m_key);
+	
+		return t.getNumberOfLocs(stub, args);
 	}
 	
 	fmt.Println("query did not find func: " + function)
@@ -140,29 +139,18 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
   var err error;
   
      counter = counter+1;
-   //  LOCs[counter] =  &loc{};
-   //  LOCs[counter].requester_name = requester_name;
-   //  LOCs[counter].beneficiary_name= beneficiary_name;
-   //  LOCs[counter].amount= amount;
-   //  LOCs[counter].expiry_date= expiry_date;
-   //  LOCs[counter].status= "requested";
-   //  LOCs[counter].advising_bank = "none";
-   //  LOCs[counter].document_hash= document_hash;
-   //  LOCs[counter].loc_filename= loc_filename;
-   //  LOCs[counter].contract_hash= contract_hash;
-   //  LOCs[counter].bol_hash = bol_hash ;
-     //LOCs [counter]= loc{requester_name,beneficiary_name,amount,expiry_date,"requested","none",document_hash,loc_filename,contract_hash, bol_hash};
-     fmt.Println(LOCs [counter].requester_name);
+    
+     //fmt.Println(LOCs [counter].requester_name);
      
-     counter_s := strconv.Itoa(counter) ;
-     counter_b := []byte(counter_s);
+    // counter_s := strconv.Itoa(counter) ;
+    // counter_b := []byte(counter_s);
      
      //err = stub.PutState(counter_s, []byte(LOCs[counter].requester_name)) //write the variable into the chaincode state
      //	if err != nil {
     // 		return nil, err
     //	}
 
-    fmt.Println(counter_b);
+    //fmt.Println(counter_b);
 	
      err = stub.PutState("counter",[]byte(args[0]));
 
@@ -269,8 +257,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
 
  //Get number of LOCs in the system
-    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, arg string) ([]byte, error){
-    	valAsbytes, err := stub.GetState(arg);
+    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, args []string) ([]byte, error){
+    	valAsbytes, err := stub.GetState([]byte("counter"));
     	
     	if err != nil {
 		return nil, err
