@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -96,9 +97,9 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	if function == "read" { //read a variable
 		return t.read(stub, args)
 	} else if function == "getLoc" {
-		i,err := strconv.Atoi(args[0])
-		fmt.Println(err); 
-		return t.getLoc(stub, i)
+	//	i,err := strconv.Atoi(args[0])
+	//	fmt.Println(err); 
+		return t.getLoc(stub, args);
 		 
 	} else if function == "getNumberOfLocs" {
 	
@@ -137,6 +138,7 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 // Adding LOCs 
 func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byte,error){
   var err error;
+  var joiner []string;
   
     valAsbytes, err := stub.GetState("counter");
     
@@ -155,6 +157,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     //	}
 
     //fmt.Println(counter_b);
+    joiner[0] = counter_s;
+    joiner[1] = "requester";
     
       err = stub.PutState("counter",counter_b);
 
@@ -162,7 +166,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
 	
-     err = stub.PutState("0_sender",[]byte(args[0]));
+     err = stub.PutState(strings.Join(joiner,"_"),[]byte(args[0]));
 
      if err != nil {
 		return nil, err
@@ -174,94 +178,21 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 }
 
 // Return specific LOC in the system
-    func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , location int) ([]byte,error) {
-	b := make([]byte, 300)
-             tracker:= 0;
-
-        
-      	for  i:=0 ; i<len(LOCs [location].requester_name) ; i++{
- 		
-		//fmt.Println(LOCs[location].requester_name[i]);
-		b[tracker] = LOCs[location].requester_name[i] ;
-	        tracker = tracker + 1;
+    func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
+    	var joiner []string ;
+    	
+    	 joiner[0] = counter_s;
+         joiner[1] = "requester";
          
-           }
-
-		  tracker = tracker + 1;
- 	for  j:=0 ; j<len(LOCs [location].beneficiary_name) ; j++{
- 		
-		//fmt.Println(LOCs[location].beneficiary_name[j]);
-		b[tracker] = LOCs[location].beneficiary_name[j] ;
-	        tracker = tracker + 1;
-         
-           }
-      
-		  tracker = tracker + 1;
-
-	 for  k:=0 ; k<len(LOCs [location].amount) ; k++{
- 		
-		//fmt.Println(LOCs[location].amount[k]);
-		b[tracker] = LOCs[location].amount[k] ;
-	        tracker = tracker + 1;
-         
-           }
-		
-		  tracker = tracker + 1;
- 	for  l:=0 ; l<len(LOCs [location].expiry_date) ; l++{
- 		
-		//fmt.Println(LOCs[location].expiry_date[l]);
-		b[tracker] = LOCs[location].expiry_date[l] ;
-	        tracker = tracker + 1;
-         
-           }
-
-		  tracker = tracker + 1;
- 	for m:= 0; m <len(LOCs [location].status) ; m++{
-            b[tracker] = LOCs[location].status[m] ;
-            tracker = tracker + 1;
-        }
-
-	  tracker = tracker + 1;
- 	for n:= 0; n <len(LOCs [location].advising_bank) ; n++{
-            b[tracker] = LOCs[location].advising_bank[n] ;
-            tracker = tracker + 1;
-        }
-
-	  tracker = tracker + 1;
-
-	 for p:= 0; p <len(LOCs [location].document_hash); p++{
-	     	//fmt.Println(LOCs[location].document_hash[p]);
-            b[tracker] = LOCs[location].document_hash[p] ;
-            tracker = tracker + 1;
-        }
-	
- 	 tracker = tracker + 1;
-		
-	 for q:= 0; q <len(LOCs [location].loc_filename); q++{
-	     	//fmt.Println(LOCs[location].loc_filename[q]);
-            b[tracker] = LOCs[location].loc_filename[q] ;
-            tracker = tracker + 1;
-        }
-		
-	  tracker = tracker + 1;
-		
-	for r:= 0; r <len(LOCs [location].contract_hash); r++{
-	     	//fmt.Println(LOCs[location].contract_hash[r]);
-            b[tracker] = LOCs[location].contract_hash[r] ;
-            tracker = tracker + 1;
-        }
-
-  	tracker = tracker + 1;
-	
-	for s:= 0; s <len(LOCs [location].bol_hash); s++{
-	     	//fmt.Println(LOCs[location].bol_hash[s]);
-            b[tracker] = LOCs[location].bol_hash[s] ;
-            tracker = tracker + 1;
-        }
-
-		
-        
-                  return b, nil;
+        valAsbytes, err := stub.GetState(strings.Join(joiner,"_"));
+    	
+    	if err != nil {
+		return nil, err
+	}
+    	
+        //s := strconv.Itoa(counter) ;
+        //ret_s := []byte(s);
+        return valAsbytes, nil;
         
     }
 
