@@ -197,7 +197,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     	
         //s := strconv.Itoa(counter) ;
         //ret_s := []byte(s);
-        return []byte(constring), nil;
+        return constring, nil;
         
     }
 
