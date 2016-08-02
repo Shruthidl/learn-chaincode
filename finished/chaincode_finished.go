@@ -157,14 +157,18 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     //	}
 
     //fmt.Println(counter_b);
-    joiner[0] = counter_s;
-    joiner[1] = "requester";
+
     
-      err = stub.PutState("counter",counter_b);
+     err = stub.PutState("counter",counter_b);
 
      if err != nil {
 		return nil, err
 	}
+	
+    joiner[0] = counter_s;
+    joiner[1] = "requester";
+    
+    
 	
      err = stub.PutState(strings.Join(joiner,"_"),[]byte(args[0]));
 
@@ -180,11 +184,12 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 // Return specific LOC in the system
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
     	var joiner []string ;
+    	var constring string;
     	
     	 joiner[0] = args[0];
          joiner[1] = "requester";
          
-        valAsbytes, err := stub.GetState(strings.Join(joiner,"_"));
+        constring, err = stub.GetState(strings.Join(joiner,"_"));
     	
     	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     	
         //s := strconv.Itoa(counter) ;
         //ret_s := []byte(s);
-        return valAsbytes, nil;
+        return []byte(constring), nil;
         
     }
 
