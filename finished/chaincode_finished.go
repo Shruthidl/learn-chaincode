@@ -184,12 +184,12 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 // Return specific LOC in the system
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
     	var joiner []string ;
-    	var constring string;
+    	 
     	
     	 joiner[0] = args[0];
          joiner[1] = "requester";
          
-        constring, err = stub.GetState(strings.Join(joiner,"_"));
+        constring, err := stub.GetState(strings.Join(joiner,"_"));
     	
     	if err != nil {
 		return nil, err
