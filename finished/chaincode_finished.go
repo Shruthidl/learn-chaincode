@@ -184,7 +184,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
      
     	 
-    	s := []string{counter_s, "requester"};
+    	s := []string{args[0], "requester"};
         s1 := strings.Join(s, "_");
     	 
          
