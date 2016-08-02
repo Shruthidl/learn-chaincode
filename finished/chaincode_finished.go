@@ -138,7 +138,7 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 // Adding LOCs 
 func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byte,error){
   var err error;
-  var joiner []string;
+   
   
     valAsbytes, err := stub.GetState("counter");
     
@@ -165,12 +165,11 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
 	
-    joiner[0] = counter_s;
-    joiner[1] = "requester";
-    
+    s := []string{counter_s, "requester"};
+    s1: = strings.Join(s, "_");
     
 	
-     err = stub.PutState(strings.Join(joiner,"_"),[]byte(args[0]));
+     err = stub.PutState(s1,[]byte(args[0]));
 
      if err != nil {
 		return nil, err
@@ -183,13 +182,13 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
 // Return specific LOC in the system
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
-    	var joiner []string ;
+     
     	 
-    	
-    	 joiner[0] = args[0];
-         joiner[1] = "requester";
+    	s := []string{counter_s, "requester"};
+        s1: = strings.Join(s, "_");
+    	 
          
-        constring, err := stub.GetState(strings.Join(joiner,"_"));
+        constring, err := stub.GetState(s1);
     	
     	if err != nil {
 		return nil, err
