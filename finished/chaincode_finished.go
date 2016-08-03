@@ -164,9 +164,9 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      if err != nil {
 		return nil, err
 	}
-	
-    s := []string{counter_s, "requester"};
-    s1 := strings.Join(s, "_");
+   //-----------------------------------------------------------------------	
+    s_requester := []string{counter_s, "requester"};
+    s1 := strings.Join(s_requester, "_");
     
 	
      err = stub.PutState(s1,[]byte(args[0]));
@@ -174,7 +174,39 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      if err != nil {
 		return nil, err
 	}
+   //-----------------------------------------------------------------------	
+    s_beneficiary := []string{counter_s, "beneficiary"};
+    s1 := strings.Join(s_beneficiary, "_");
+    
 	
+     err = stub.PutState(s1,[]byte(args[1]));
+
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+    s_amount := []string{counter_s, "amount"};
+    s1 := strings.Join(s_amount, "_");
+    
+	
+     err = stub.PutState(s1,[]byte(args[2]));
+
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+    s_expiry_date:= []string{counter_s, "expiry_date"};
+    s1 := strings.Join(s_expiry_date, "_");
+    
+	
+     err = stub.PutState(s1,[]byte(args[3]));
+
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+
+
 	
      return nil, nil;
 
