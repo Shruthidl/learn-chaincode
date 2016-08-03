@@ -195,7 +195,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
    //-----------------------------------------------------------------------
-    s_expiry_date:= []string{counter_s, "expiry_date"};
+    s_expiry_date := []string{counter_s, "expiry_date"};
     s1 := strings.Join(s_expiry_date, "_");
     
 	
