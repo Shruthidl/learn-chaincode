@@ -164,11 +164,12 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      if err != nil {
 		return nil, err
 	}
-	/* Start
+	
    //-----------------------------------------------------------------------	
     s_requester := []string{counter_s, "requester"};
     s1 := strings.Join(s_requester, "_");
     
+    /* Start
 	
      err = stub.PutState(s1,[]byte(args[0]));
 
