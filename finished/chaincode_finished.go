@@ -246,7 +246,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
    s_contract_hash := []string{counter_s, "contract_hash"};
     s1 = strings.Join(s_contract_hash, "_");
     
-    err = stub.PutState(s1,[]byte(args[6]));
+   // err = stub.PutState(s1,[]byte(args[6]));
+    err = stub.PutState(s1,[]byte("test"));
 
      if err != nil {
 		return nil, err
@@ -257,7 +258,8 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
   s_bol_hash := []string{counter_s, "bol_hash"};
     s1 = strings.Join(s_bol_hash, "_");
     
-    err = stub.PutState(s1,[]byte(args[7]));
+   // err = stub.PutState(s1,[]byte(args[7]));
+      err = stub.PutState(s1,[]byte("test2"));
 
      if err != nil {
 		return nil, err
