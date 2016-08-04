@@ -205,11 +205,67 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
    //-----------------------------------------------------------------------
+   s_status := []string{counter_s, "status"};
+    s1 := strings.Join(s_status, "_");
+    
+    err = stub.PutState(s1,[]byte("requested"));
 
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+  s_advising_bank := []string{counter_s, "advising_bank"};
+    s1 := strings.Join(s_advising_bank, "_");
+    
+    err = stub.PutState(s1,[]byte("none"));
 
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+ s_document_hash := []string{counter_s, "document_hash"};
+    s1 := strings.Join(s_document_hash, "_");
+    
+    err = stub.PutState(s1,[]byte(args[4]));
+
+     if err != nil {
+		return nil, err
+	}
+   //-----------------------------------------------------------------------
+ s_loc_filename := []string{counter_s, "loc_filename"};
+    s1 := strings.Join(s_loc_filename, "_");
+    
+    err = stub.PutState(s1,[]byte(args[5]));
+
+     if err != nil {
+		return nil, err
+	}
 	
      return nil, nil;
+  //-------------------------------------------------------------------------
+   s_contract_hash := []string{counter_s, "contract_hash"};
+    s1 := strings.Join(s_contract_hash, "_");
+    
+    err = stub.PutState(s1,[]byte(args[6]));
 
+     if err != nil {
+		return nil, err
+	}
+	
+     return nil, nil;
+  //-------------------------------------------------------------------------
+  s_bol_hash := []string{counter_s, "bol_hash"};
+    s1 := strings.Join(s_bol_hash, "_");
+    
+    err = stub.PutState(s1,[]byte(args[7]));
+
+     if err != nil {
+		return nil, err
+	}
+	
+     return nil, nil;
+  //-------------------------------------------------------------------------
+  
 }
 
 // Return specific LOC in the system
