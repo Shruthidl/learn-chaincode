@@ -169,7 +169,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     s_requester := []string{counter_s, "requester"};
     s1 := strings.Join(s_requester, "_");
     
-    /* Start
+   
 	
      err = stub.PutState(s1,[]byte(args[0]));
 
@@ -243,32 +243,32 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
 	
-     return nil, nil;
-   end  */ 
+    
+  
   //-------------------------------------------------------------------------
    s_contract_hash := []string{counter_s, "contract_hash"};
     s1 = strings.Join(s_contract_hash, "_");
     
-   // err = stub.PutState(s1,[]byte(args[6]));
-    err = stub.PutState(s1,[]byte("test"));
+   err = stub.PutState(s1,[]byte(args[6]));
+   // err = stub.PutState(s1,[]byte("test"));
 
      if err != nil {
 		return nil, err
 	}
 	
-     return nil, nil;
+   
   //-------------------------------------------------------------------------
   s_bol_hash := []string{counter_s, "bol_hash"};
     s1 = strings.Join(s_bol_hash, "_");
     
-   // err = stub.PutState(s1,[]byte(args[7]));
-      err = stub.PutState(s1,[]byte("test2"));
+   err = stub.PutState(s1,[]byte(args[7]));
+    //  err = stub.PutState(s1,[]byte("test2"));
 
      if err != nil {
 		return nil, err
 	}
 	
-     return nil, nil;
+    
   //-------------------------------------------------------------------------
   
 }
@@ -380,7 +380,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     	
     	s = []string{string(requester_string),string(beneficiary_string),string(amount_string),string(expiry_date_string),string(status_string),string(advising_bank_string),string(document_hash_string),string(loc_filename_string),string(contract_hash_string),string(bol_hash_string)};
         
-        s=[]string{string(contract_hash_string),string(bol_hash_string)};
+       // s=[]string{string(contract_hash_string),string(bol_hash_string)};
         final_string := strings.Join(s, "|");
     	
     	
