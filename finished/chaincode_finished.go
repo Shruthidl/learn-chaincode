@@ -374,7 +374,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	//--------------------------------------------------------------
     	
     	s = []string{string(requester_string),string(beneficiary_string),string(amount_string),string(expiry_date_string),string(status_string),string(advising_bank_string),string(document_hash_string),string(loc_filename_string),string(contract_hash_string),string(bol_hash_string)};
-        final_string = strings.Join(s, "|");
+        final_string := strings.Join(s, "|");
     	
         //s := strconv.Itoa(counter) ;
         //ret_s := []byte(s);
