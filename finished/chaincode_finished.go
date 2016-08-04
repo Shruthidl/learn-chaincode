@@ -267,10 +267,9 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      if err != nil {
 		return nil, err
 	}
-	
-    
+
   //-------------------------------------------------------------------------
-  
+                return nil, nil
 }
 
 // Return specific LOC in the system
