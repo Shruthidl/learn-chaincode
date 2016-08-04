@@ -164,6 +164,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      if err != nil {
 		return nil, err
 	}
+	/* Start
    //-----------------------------------------------------------------------	
     s_requester := []string{counter_s, "requester"};
     s1 := strings.Join(s_requester, "_");
@@ -242,6 +243,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
 	
      return nil, nil;
+   end  */ 
   //-------------------------------------------------------------------------
    s_contract_hash := []string{counter_s, "contract_hash"};
     s1 = strings.Join(s_contract_hash, "_");
