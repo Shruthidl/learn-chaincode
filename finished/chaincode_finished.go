@@ -176,7 +176,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------	
     s_beneficiary := []string{counter_s, "beneficiary"};
-    s1 := strings.Join(s_beneficiary, "_");
+    s1 = strings.Join(s_beneficiary, "_");
     
 	
      err = stub.PutState(s1,[]byte(args[1]));
@@ -186,7 +186,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
     s_amount := []string{counter_s, "amount"};
-    s1 := strings.Join(s_amount, "_");
+    s1 = strings.Join(s_amount, "_");
     
 	
      err = stub.PutState(s1,[]byte(args[2]));
@@ -196,7 +196,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
     s_expiry_date := []string{counter_s, "expiry_date"};
-    s1 := strings.Join(s_expiry_date, "_");
+    s1 = strings.Join(s_expiry_date, "_");
     
 	
      err = stub.PutState(s1,[]byte(args[3]));
@@ -206,7 +206,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
    s_status := []string{counter_s, "status"};
-    s1 := strings.Join(s_status, "_");
+    s1 = strings.Join(s_status, "_");
     
     err = stub.PutState(s1,[]byte("requested"));
 
@@ -215,7 +215,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
   s_advising_bank := []string{counter_s, "advising_bank"};
-    s1 := strings.Join(s_advising_bank, "_");
+    s1 = strings.Join(s_advising_bank, "_");
     
     err = stub.PutState(s1,[]byte("none"));
 
@@ -224,7 +224,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
  s_document_hash := []string{counter_s, "document_hash"};
-    s1 := strings.Join(s_document_hash, "_");
+    s1 = strings.Join(s_document_hash, "_");
     
     err = stub.PutState(s1,[]byte(args[4]));
 
@@ -233,7 +233,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
    //-----------------------------------------------------------------------
  s_loc_filename := []string{counter_s, "loc_filename"};
-    s1 := strings.Join(s_loc_filename, "_");
+    s1 = strings.Join(s_loc_filename, "_");
     
     err = stub.PutState(s1,[]byte(args[5]));
 
@@ -244,7 +244,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      return nil, nil;
   //-------------------------------------------------------------------------
    s_contract_hash := []string{counter_s, "contract_hash"};
-    s1 := strings.Join(s_contract_hash, "_");
+    s1 = strings.Join(s_contract_hash, "_");
     
     err = stub.PutState(s1,[]byte(args[6]));
 
@@ -255,7 +255,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      return nil, nil;
   //-------------------------------------------------------------------------
   s_bol_hash := []string{counter_s, "bol_hash"};
-    s1 := strings.Join(s_bol_hash, "_");
+    s1 = strings.Join(s_bol_hash, "_");
     
     err = stub.PutState(s1,[]byte(args[7]));
 
