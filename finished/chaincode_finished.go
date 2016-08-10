@@ -164,7 +164,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 // Return specific LOC in the system
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
      
-    	loc_string,err :=stub GetState(strconv.Itoa(location))
+    	loc_string,err :=stub GetState(args[0])
 	
     	if err != nil {
 		return nil, err
