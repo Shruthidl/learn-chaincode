@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"bytes"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
