@@ -186,13 +186,54 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
 
  //Get number of LOCs in the system
-    func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, args []string) ([]byte, error){
+    func (t *SimpleChaincode) getNumberOfLocs(stub *shim.ChaincodeStub, args []string) ([]byte, error){
         valAsbytes:=strconv.Itoa(counter);
         return []byte(valAsbytes), nil;
     }
 
+    func (t *SimpleChaincode) updateLocStatus(stub *shim.ChaincodeStub, args []string) ([]byte, error){
+    	
+    	var data string;
+    	value , err :=stub.GetState(args[0]);
+    		if err != nil {
+		return nil, err
+	}
+	
+	for i, data1 := range bytes.Split(value, []byte{0}) { //split by white space
+		fmt.Printf("Index%d :  %s\n", i, string(data1));
+		 data=string(data1);
+	}
+	s := strings.Split(data, "|");
+	s[4] = args[1];
+	stringByte := strings.Join(s, "|") 
+	PutState(args[0], []byte(stringByte))
+	
+	return []byte(stringByte), nil;
+    }
 
 
+  func (t *SimpleChaincode) uploadBol(stub *shim.ChaincodeStub, args []string) ([]byte, error){
+      
+       var data string;
+	valueAsBytes , err := GetState(args[0]);
+
+	if err != nil {
+		return nil,err
+	}
+	
+	for i, data1 := range bytes.Split(valueAsBytes, []byte{0}) { //split by white space
+		fmt.Printf("Index%d :  %s\n", i, string(data1))
+		 data=string(data1)
+	}
+	s := strings.Split(data, "|");
+	s[9] = args[1]
+	s[4] = args[2];
+	stringAsByte := strings.Join(s, "|") 
+	PutState(args[0], []byte(stringAsByte))
+	
+
+       	return []byte(stringAsByte), nil;
+    }
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 	var jsonResp string
