@@ -150,7 +150,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      stringvalues = append(args,counter_s)//string array (value)
      s_requester := counter_s //counter value(key)
 
-     stringByte := strings.Join(stringvalues , "\x00") // x00 = null
+     stringByte := strings.Join(stringvalues , "|") // x00 = null
      
       err = stub.PutState(s_requester, []byte(stringByte));
 
