@@ -32,21 +32,10 @@ type SimpleChaincode struct {
 var key string ;
 var value string ;
 
-type loc struct  {
-        requester_name string;
-        beneficiary_name  string;
-        amount  string;
-        expiry_date string;
-       	status string;
-        advising_bank string;
-        document_hash string;
-        loc_filename string;
-        contract_hash string;
-        bol_hash string;
-    }
+
    
 var counter int = 0;
-var LOCs map[int]*loc;
+
 
 
 func main() {
@@ -138,246 +127,50 @@ func (t *SimpleChaincode) write(stub *shim.ChaincodeStub, args []string) ([]byte
 // Adding LOCs 
 func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byte,error){
   var err error;
+  var counter1 int;
+  
+    valAsbytes :=stub.GetState(strconv.Itoa(counter))
+    s:=string(valAsbytes);
+	
+     if len(s) != 0 {
+	     lastByByte := s[len(s)-1:]
+             counter1, err =  strconv.Atoi(lastByByte)
+ 		if err != nil {
+     			return  nil,err
+  	         }
+	
+   	  } else {
+             counter1 = 0
+    	   }
    
-  
-    valAsbytes, err := stub.GetState("counter");
+     counter = counter1+1;
     
-     counter, err = strconv.Atoi(string(valAsbytes));
-  
-     counter = counter+1;
-    
-     //fmt.Println(LOCs [counter].requester_name);
+     counter_s := strconv.Itoa(counter)
+     stringvalues = append(value,counter_s)//string array (value)
+     s_requester := counter_s //counter value(key)
+
+     stringByte := strings.Join(stringvalues , "\x00") // x00 = null
      
-    counter_s := strconv.Itoa(counter) ;
-    counter_b := []byte(counter_s);
-     
-     //err = stub.PutState(counter_s, []byte(LOCs[counter].requester_name)) //write the variable into the chaincode state
-     //	if err != nil {
-    // 		return nil, err
-    //	}
+      err = stub.PutState(s_requester, []byte(stringByte));
 
-    //fmt.Println(counter_b);
-
-    
-     err = stub.PutState("counter",counter_b);
-
-     if err != nil {
-		return nil, err
-	}
-	
-   //-----------------------------------------------------------------------	
-    s_requester := []string{counter_s, "requester"};
-    s1 := strings.Join(s_requester, "_");
-    
-   
-	
-     err = stub.PutState(s1,[]byte(args[0]));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------	
-    s_beneficiary := []string{counter_s, "beneficiary"};
-    s1 = strings.Join(s_beneficiary, "_");
-    
-	
-     err = stub.PutState(s1,[]byte(args[1]));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
-    s_amount := []string{counter_s, "amount"};
-    s1 = strings.Join(s_amount, "_");
-    
-	
-     err = stub.PutState(s1,[]byte(args[2]));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
-    s_expiry_date := []string{counter_s, "expiry_date"};
-    s1 = strings.Join(s_expiry_date, "_");
-    
-	
-     err = stub.PutState(s1,[]byte(args[3]));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
-   s_status := []string{counter_s, "status"};
-    s1 = strings.Join(s_status, "_");
-    
-    err = stub.PutState(s1,[]byte("requested"));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
-  s_advising_bank := []string{counter_s, "advising_bank"};
-    s1 = strings.Join(s_advising_bank, "_");
-    
-    err = stub.PutState(s1,[]byte("none"));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
- s_document_hash := []string{counter_s, "document_hash"};
-    s1 = strings.Join(s_document_hash, "_");
-    
-    err = stub.PutState(s1,[]byte(args[4]));
-
-     if err != nil {
-		return nil, err
-	}
-   //-----------------------------------------------------------------------
- s_loc_filename := []string{counter_s, "loc_filename"};
-    s1 = strings.Join(s_loc_filename, "_");
-    
-    err = stub.PutState(s1,[]byte(args[5]));
-
-     if err != nil {
-		return nil, err
-	}
-	
-    
-  
-  //-------------------------------------------------------------------------
-   s_contract_hash := []string{counter_s, "contract_hash"};
-    s1 = strings.Join(s_contract_hash, "_");
-    
-   err = stub.PutState(s1,[]byte(args[6]));
-   // err = stub.PutState(s1,[]byte("test"));
-
-     if err != nil {
+      if err != nil {
 		return nil, err
 	}
 	
    
-  //-------------------------------------------------------------------------
-  s_bol_hash := []string{counter_s, "bol_hash"};
-    s1 = strings.Join(s_bol_hash, "_");
-    
-   err = stub.PutState(s1,[]byte(args[7]));
-    //  err = stub.PutState(s1,[]byte("test2"));
-
-     if err != nil {
-		return nil, err
-	}
-
-  //-------------------------------------------------------------------------
                 return nil, nil
 }
 
 // Return specific LOC in the system
     func (t *SimpleChaincode) getLoc(stub *shim.ChaincodeStub , args []string) ([]byte,error) {
      
-    	 
-    	s := []string{args[0], "requester"};
-        s1 := strings.Join(s, "_");
-    	 
-         
-        requester_string, err := stub.GetState(s1);
-    	
+    	loc_string,err :=stub GetState(strconv.Itoa(location))
+	
     	if err != nil {
 		return nil, err
 	}
-    	//------------------------------------------------------------
-    	s = []string{args[0], "beneficiary"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        beneficiary_string, err := stub.GetState(s1);
     	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-    	s = []string{args[0], "amount"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        amount_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "expiry_date"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        expiry_date_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "status"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        status_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "advising_bank"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        advising_bank_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "document_hash"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        document_hash_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "loc_filename"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        loc_filename_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-    	s = []string{args[0], "contract_hash"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        contract_hash_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-	s = []string{args[0], "bol_hash"};
-        s1 = strings.Join(s, "_");
-    	 
-         
-        bol_hash_string, err := stub.GetState(s1);
-    	
-    	if err != nil {
-		return nil, err
-	}
-	//--------------------------------------------------------------
-    	
-    	s = []string{string(requester_string),string(beneficiary_string),string(amount_string),string(expiry_date_string),string(status_string),string(advising_bank_string),string(document_hash_string),string(loc_filename_string),string(contract_hash_string),string(bol_hash_string)};
+    	s = []string{string(loc_string)};
         
        // s=[]string{string(contract_hash_string),string(bol_hash_string)};
         final_string := strings.Join(s, "|");
@@ -393,14 +186,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
  //Get number of LOCs in the system
     func (t *SimpleChaincode) getNumberOfLocs (stub *shim.ChaincodeStub, args []string) ([]byte, error){
-    	valAsbytes, err := stub.GetState("counter");
-    	
-    	if err != nil {
-		return nil, err
-	}
-    	
-        //s := strconv.Itoa(counter) ;
-        //ret_s := []byte(s);
+        valAsbytes:=strconv.Itoa(counter);
         return valAsbytes, nil;
     }
 
