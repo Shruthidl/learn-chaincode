@@ -130,7 +130,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
   var err error;
   var counter1 int;
   
-    valAsbytes :=stub.GetState(strconv.Itoa(counter))
+    valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
     s:=string(valAsbytes);
 	
      if len(s) != 0 {
