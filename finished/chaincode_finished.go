@@ -212,7 +212,13 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	s := strings.Split(data, "|");
 	s[4] = args[1];
 	stringByte := strings.Join(s, "|") 
-	PutState(args[0], []byte(stringByte))
+	
+	err = stub.PutState(args[0], []byte(stringByte));
+
+	  if err != nil {
+		return nil, err
+		}
+
 	
 	return []byte(stringByte), nil;
     }
@@ -234,9 +240,13 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	s := strings.Split(data, "|");
 	s[9] = args[1]
 	s[4] = args[2];
-	stringAsByte := strings.Join(s, "|") 
-	PutState(args[0], []byte(stringAsByte))
+	stringAsByte := strings.Join(s, "|");
 	
+	 err = stub.PutState(args[0], []byte(stringAsByte));
+
+      		if err != nil {
+		return nil, err
+		}
 
        	return []byte(stringAsByte), nil;
     }
