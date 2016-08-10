@@ -147,7 +147,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
      counter = counter1+1;
     
      counter_s := strconv.Itoa(counter)
-     stringvalues = append(value,counter_s)//string array (value)
+     stringvalues = append(args,counter_s)//string array (value)
      s_requester := counter_s //counter value(key)
 
      stringByte := strings.Join(stringvalues , "\x00") // x00 = null
