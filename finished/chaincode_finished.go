@@ -170,7 +170,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 		return nil, err
 	}
     	
-    	s = []string{string(loc_string)};
+    	s := []string{string(loc_string)};
         
        // s=[]string{string(contract_hash_string),string(bol_hash_string)};
         final_string := strings.Join(s, "|");
