@@ -35,6 +35,7 @@ var value string ;
 
    
 var counter int = 0;
+var stringvalues []string;
 
 
 
