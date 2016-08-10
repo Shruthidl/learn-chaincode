@@ -227,7 +227,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
   func (t *SimpleChaincode) uploadBol(stub *shim.ChaincodeStub, args []string) ([]byte, error){
       
        var data string;
-	valueAsBytes , err := GetState(args[0]);
+	valueAsBytes , err :=stub.GetState(args[0]);
 
 	if err != nil {
 		return nil,err
