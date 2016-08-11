@@ -262,7 +262,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 func (t *SimpleChaincode) getAllLoc(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 	var list []string;
 	
-	for i := 1; i < counter; i++ {
+	for i := 1; i <=counter; i++ {
 	 valueAsBytes , err := GetState(strconv.Itoa(i));
 	if err != nil {
 	 return nill,err	
@@ -273,7 +273,6 @@ func (t *SimpleChaincode) getAllLoc(stub *shim.ChaincodeStub, args []string) ([]
 	fmt.Println("Get All Lo", list);
 	}
 	stringByte := strings.Join(list, ",")
-	
 	
 	return []byte(stringByte), nil;
 }
