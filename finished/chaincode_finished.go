@@ -270,9 +270,8 @@ func (t *SimpleChaincode) getLocList(stub *shim.ChaincodeStub, args []string) ([
 	  s:=string(valueAsBytes);
 	  list =append(list,s);
 	}
-	fmt.Println("Get All Lo", list);
-	}
-	stringByte := strings.Join(list, ",")
+
+	stringByte := strings.Join(list, ",");
 	
 	return []byte(stringByte), nil;
 }
