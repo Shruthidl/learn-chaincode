@@ -101,8 +101,9 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	} else if function == "getNumberOfLocs" {
 	
 		return t.getNumberOfLocs(stub, args);
-	}
-	else if function == "getAllLoc" {
+	} 
+	
+	   if function == "getAllLoc" {
 	
 		return t.getAllLoc(stub, args);
 	}
