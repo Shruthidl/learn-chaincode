@@ -264,7 +264,7 @@ func (t *SimpleChaincode) getLocList(stub *shim.ChaincodeStub, args []string) ([
 	for i := 1; i <=counter; i++ {
 	 valueAsBytes , err := GetState(strconv.Itoa(i));
 	if err != nil {
-	 return nill,err	
+	 return nil,err	
 	}
 	  s:=string(valueAsBytes);
 	  list =append(list,s);
