@@ -98,13 +98,15 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	//	fmt.Println(err); 
 		return t.getLoc(stub, args);
 		 
-	} else if function == "getNumberOfLocs" {
-	
-		return t.getNumberOfLocs(stub, args);
-	} else if function == "getAllLoc" {
+	}
+	else if function == "getLocList" {
 	
 		return t.getAllLoc(stub, args);
 	}
+	else if function == "getNumberOfLocs" {
+	
+		return t.getNumberOfLocs(stub, args);
+	} 
 	
 	fmt.Println("query did not find func: " + function)
 
