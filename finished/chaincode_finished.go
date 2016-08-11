@@ -251,6 +251,26 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 
        	return []byte(stringAsByte), nil;
     }
+    
+    
+    // get complete loc list
+    
+func (t *SimpleChaincode) getAllLoc(stub *shim.ChaincodeStub, args []string) ([]string, error) {
+	var list []string;
+	
+	for i := 1; i < counter; i++ {
+	 valueAsBytes , err := GetState(strconv.Itoa(i));
+	if err != nil {
+	 return nill,err	
+	}
+	  s:=string(valueAsBytes);
+	  list =append(list,s);
+	}
+	fmt.Println("Get All Lo", list);
+	}
+	
+	return list, nil;
+}
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 	var jsonResp string
