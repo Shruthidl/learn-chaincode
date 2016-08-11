@@ -98,11 +98,10 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	//	fmt.Println(err); 
 		return t.getLoc(stub, args);
 		 
-	}
-	else if function == "getLocList" {
+	} else if function == "getList" {
 	
-		return t.getAllLoc(stub, args);
-	}
+		return t.getLocList(stub, args);
+	} 
 	else if function == "getNumberOfLocs" {
 	
 		return t.getNumberOfLocs(stub, args);
@@ -260,7 +259,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
     
     // get complete loc list
     
-func (t *SimpleChaincode) getAllLoc(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
+func (t *SimpleChaincode) getLocList(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 	var list []string;
 	
 	for i := 1; i <=counter; i++ {
