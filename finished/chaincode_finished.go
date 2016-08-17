@@ -227,7 +227,7 @@ func (t *SimpleChaincode) addLoc(stub *shim.ChaincodeStub, args []string) ([]byt
 	return []byte(stringByte), nil;
     }
 
-
+ //upload Bol document
   func (t *SimpleChaincode) uploadBol(stub *shim.ChaincodeStub, args []string) ([]byte, error){
       
        var data string;
@@ -274,6 +274,36 @@ func (t *SimpleChaincode) getLocList(stub *shim.ChaincodeStub, args []string) ([
 	
 	return []byte(stringByte), nil;
 }
+
+ //upload contract document
+ func (t *SimpleChaincode) uploadContract(stub *shim.ChaincodeStub, args []string) ([]byte, error){
+      
+       var contract string;
+	valueAsBytes , err :=stub.GetState(args[0]);
+
+	if err != nil {
+		return nil,err
+	}
+	
+	for i, data := range bytes.Split(valueAsBytes, []byte{0}) { //split by white space
+		fmt.Printf("Index%d :  %s\n", i, string(data))
+		 contract=string(data)
+	}
+	s := strings.Split(contract, "|");
+	s[7] = args[1]
+	s[4] = args[2];
+	stringAsByte := strings.Join(s, "|");
+	
+	 err = stub.PutState(args[0], []byte(stringAsByte));
+
+      		if err != nil {
+		return nil, err
+		}
+
+       	return []byte(stringAsByte), nil;
+    }
+    
+    
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
 	var jsonResp string
