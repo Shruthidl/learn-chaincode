@@ -79,6 +79,9 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
 	} else if function == "uploadBol" {
 		fmt.Println("**** First argument in uploadBol:****" + args[0])
 		return t.uploadBol(stub, args)
+	} else if function == "uploadContract" {
+		fmt.Println("**** First argument in uploadContract:****" + args[0])
+		return t.uploadContract(stub, args)
 	}
 	
 	fmt.Println("invoke did not find func: " + function)
