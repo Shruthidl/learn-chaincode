@@ -177,7 +177,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	}
 	
 		
-		s1 := strings.Split(value, "|");
+	s1 := strings.Split(string(value), "|");
 	
 	       var mCount int = len(s1);
                parts  := make([]string, mCount );
