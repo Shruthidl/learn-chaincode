@@ -224,14 +224,16 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
          var mCount1 int = len(content1);
          parts1  := make([]string, mCount1 );
          parts1 = content1;
-         var str bytes.Buffer;
 		
-	 str.WriteString(strconv.Itoa(txncounter));
+		
+        var buffer bytes.Buffer
+		
+	 buffer.WriteString(strconv.Itoa(txncounter));
           fmt.Println(str);
-          str.WriteString("|");
-          str.WriteString(strconv.Itoa(counter));
-          str.WriteString("|");
-          str.WriteString(content[i]);	
+          buffer.WriteString("|");
+          buffer.WriteString(strconv.Itoa(counter));
+          buffer.WriteString("|");
+          buffer.WriteString(content[i]);	
 	status := "Validated|20-01-2017 07:20AM";	
 	 if(strings.HasPrefix(parts1[0], "1240")){
          status = "Validated|20-01-2017 07:20AM";
@@ -252,12 +254,12 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         }
 	
                fmt.Println(card);
-		str.WriteString(string(stub.GetState(card)));
-	        str.WriteString((parts1[0]));
-		str.WriteString("|0.25|");
-		str.WriteString(status);
+		//buffer.WriteString(string(stub.GetState(card)));
+	        buffer.WriteString((parts1[0]));
+		buffer.WriteString("|0.25|");
+		buffer.WriteString(status);
 		
-		err = stub.PutState(strconv.Itoa(txncounter), []byte(str.String()));	
+		err = stub.PutState(strconv.Itoa(txncounter), []byte(buffer.String()));	
 	     
 		if err != nil {
 			return nil, err
