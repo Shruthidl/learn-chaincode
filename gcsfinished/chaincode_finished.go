@@ -184,11 +184,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 	       var mCount int = len(s);
                parts  := make([]string, mCount );
-               parts = s;
+                parts = s;
 	         parts[5] = "Validated";
-		stringByte := strings.Join(parts, "|") 
+		stringBytes := strings.Join(parts, "|") 
 
-		err = stub.PutState(args[0], []byte(stringByte));
+		err = stub.PutState(args[0], []byte(stringBytes));
 	
 	     
 	
