@@ -214,7 +214,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 	//enrich data
 	
-	content := strings.Split(arg[6], ",");
+	content := strings.Split(args[6], ",");
 	
 	for i := 0; i < len(content); i++ {
 	txncounter = txncounter + 1;
