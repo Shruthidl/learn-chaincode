@@ -255,7 +255,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         }
 	
                fmt.Println(card);
-		buffer.WriteString(string(stub.GetState(card)));
+		 cardname,err :=stub.GetState(card)
+		
+		buffer.WriteString(string(cardname));
 	        buffer.WriteString((parts1[0]));
 		buffer.WriteString("|0.25|");
 		buffer.WriteString(status);
@@ -270,29 +272,6 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
                return nil, nil
 }
 	
- func (t *SimpleChaincode) getStatus(stub shim.ChaincodeStubInterface, arg string) ([]byte, error){
-        if(strings.HasPrefix(arg, "1240")){
-         
-		  return []byte("Validated|20-01-2017 07:20AM"), nil;
-        }
-     
-	     return []byte("Invalid|20-01-2017 07:20AM"), nil;
-    }
-
- func (t *SimpleChaincode) getCard(stub shim.ChaincodeStubInterface, arg string) ([]byte, error){
-        if(strings.HasPrefix(arg, "364924")){
-           
-		 return []byte("364924"), nil;
-        } else if(strings.HasPrefix(arg, "364914")){
-         
-		 return []byte("364914"), nil;
-        } else if(strings.HasPrefix(arg, "364927")){
-           
-		 return []byte("364927"), nil;
-        }
-       
-	   return []byte("364999"), nil;
-    }
 
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
