@@ -186,18 +186,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(args[0], []byte(stringByte));
 	
-	if(!strings.HasPrefix(args[6] , "H-")){
-		 for i, data2 := range bytes.Split(value, []byte{0}) { //split by white space
-			fmt.Printf("Index%d :  %s\n", i, string(data2));
-			 data=string(data2); 
-		 }
-		s := strings.Split(data, "|");
-		s[5] = "Rejected";
-		stringByte := strings.Join(s, "|") 
-
-		err = stub.PutState(args[0], []byte(stringByte));
-	}
-     
+	     
 	
                return nil, nil
 }
