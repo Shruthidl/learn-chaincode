@@ -170,36 +170,32 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		return nil, err
 	}
 	
-	s1 := strings.Split(arg[6], ",");
-	
-	for i := 0; i < len(s1); i++ {
-	txncounter = txncounter + 1;
-	 fmt.Println(s1[i]);
-	 content:=strings.Split(s1[i],"|")  
-         var str bytes.Buffer;
-		
-	  str.WriteString(strconv.Itoa(txncounter));
-          fmt.Println(str);
-          str.WriteString("|");
-          str.WriteString(strconv.Itoa(counter));
-          str.WriteString("|");
-          str.WriteString(s1[i]);	
-	var status = getStatus(content[0]);
-	 fmt.Println(status);
-	var card = getCard(content[1]);
-        fmt.Println(card);
-        str.WriteString(stub.GetState(card));
-	str.WriteString(content[4]);
-	str.WriteString("|0.25|");
-	
-	str.WriteString(status);
-		
-		err = stub.PutState(txncounter, []byte(str.String()));	
-	     
-	if err != nil {
+	//precapture
+	 value,err :=stub.GetState(strconv.Itoa(counter))
+		if err != nil {
 		return nil, err
-		}
-		
+	}
+	
+		 for i, data1 := range bytes.Split(value, []byte{0}) { //split by white space
+		fmt.Printf("Index%d :  %s\n", i, string(data1));
+		 data=string(data1);
+	 }
+		s := strings.Split(data, "|");
+	         s[5] := "Validated";
+		stringByte := strings.Join(s, "|") 
+
+		err = stub.PutState(args[0], []byte(stringByte));
+	
+	if(!strings.HasPrefix(args[6] , "H-")){
+		 for i, data1 := range bytes.Split(value, []byte{0}) { //split by white space
+			fmt.Printf("Index%d :  %s\n", i, string(data1));
+			 data=string(data1); 
+		 }
+		s := strings.Split(data, "|");
+		s[5] := "Rejected";
+		stringByte := strings.Join(s, "|") 
+
+		err = stub.PutState(args[0], []byte(stringByte));
 	}
      
 	
