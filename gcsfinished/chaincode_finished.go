@@ -65,6 +65,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	// Handle different functions
 	if function == "init" {
 		return t.Init(stub, "init", args)
+	} else if function == "write" {
+		return t.write(stub, args)
+	} else if function == "addOutClearFile" {
+		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
+		return t.addOutClearFile(stub, args)
 	} 
 	
 	fmt.Println("invoke did not find func: " + function)
@@ -148,6 +153,14 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
                return nil, nil
 }
 	
+ func (t *SimpleChaincode) getStatus(stub shim.ChaincodeStubInterface, arg string) ([]byte, error){
+        if(strings.HasPrefix(arg, "1240")){
+         
+		  return []byte("Validated|20-01-2017 07:20AM"), nil;
+        }
+     
+	     return []byte("Invalid|20-01-2017 07:20AM"), nil;
+    }
 
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
