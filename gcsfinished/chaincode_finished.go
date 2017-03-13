@@ -170,6 +170,37 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		return nil, err
 	}
 	
+	s1 := strings.Split(arg[6], ",");
+	
+	for i := 0; i < len(s1); i++ {
+	txncounter = txncounter + 1;
+	 fmt.Println(s1[i]);
+	 content:=strings.Split(s1[i],"|")  
+         var str bytes.Buffer;
+		
+	  str.WriteString(strconv.Itoa(txncounter));
+          fmt.Println(str);
+          str.WriteString("|");
+          str.WriteString(strconv.Itoa(counter));
+          str.WriteString("|");
+          str.WriteString(s1[i]);	
+	var status = getStatus(content[0]);
+	 fmt.Println(status);
+	var card = getCard(content[1]);
+        fmt.Println(card);
+        str.WriteString(stub.GetState(card));
+	str.WriteString(content[4]);
+	str.WriteString("|0.25|");
+	
+	str.WriteString(status);
+		
+		err = stub.PutState(txncounter, []byte(str.String()));	
+	     
+	if err != nil {
+		return nil, err
+		}
+		
+	}
      
 	
                return nil, nil
