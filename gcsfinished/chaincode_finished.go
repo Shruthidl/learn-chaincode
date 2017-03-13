@@ -122,7 +122,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 }
 
 // Adding OutClear files 
-func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) (int ,error){
+func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
   var counter1 int;
   
@@ -204,7 +204,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
 		     
-		     return counter , nil;
+		     return []byte(stringBytes), nil;
 	}
 	
 	if(!strings.HasPrefix(args[6] , "T-")){
@@ -214,7 +214,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
 		
-		 return counter , nil;
+		 return []byte(stringBytes), nil;
 	}
 	
 		
@@ -277,7 +277,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 			}
 	}
 	
-               return counter, nil
+               return []byte(stringBytes), nil
 }
 	
 
