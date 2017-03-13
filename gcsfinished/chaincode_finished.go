@@ -229,7 +229,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         var buffer bytes.Buffer
 		
 	 buffer.WriteString(strconv.Itoa(txncounter));
-          fmt.Println(str);
+          fmt.Println(buffer);
           buffer.WriteString("|");
           buffer.WriteString(strconv.Itoa(counter));
           buffer.WriteString("|");
