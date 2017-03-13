@@ -176,15 +176,12 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		return nil, err
 	}
 	
-		 for i, data1 := range bytes.Split(value, []byte{0}) { //split by white space
-		fmt.Printf("Index%d :  %s\n", i, string(data1));
-		 data=string(data1);
-	 }
-		s := strings.Split(data, "|");
+		
+		s1 := strings.Split(value, "|");
 	
-	       var mCount int = len(s);
+	       var mCount int = len(s1);
                parts  := make([]string, mCount );
-                parts = s;
+                parts = s1;
 	         parts[5] = "Validated";
 		stringBytes := strings.Join(parts, "|") 
 
