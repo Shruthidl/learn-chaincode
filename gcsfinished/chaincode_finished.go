@@ -17,6 +17,8 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
+	"bytes"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -105,6 +107,47 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	
 	return nil, nil
 }
+
+// Adding OutClear files 
+func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
+  var err error;
+  var counter1 int;
+  
+	
+	// add out clear files
+    valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
+    s:=string(valAsbytes);
+	
+     if len(s) != 0 {
+	     lastByByte := s[len(s)-1:]
+             counter1, err =  strconv.Atoi(lastByByte)
+ 		if err != nil {
+     			return  nil,err
+  	         }
+	
+   	  } else {
+             counter1 = 0
+    	   }
+   
+     counter = counter1+1;
+    
+     counter_s := strconv.Itoa(counter)
+     stringvalues = append(args,counter_s)//string array (value)
+     s_requester := counter_s //counter value(key)
+
+     stringByte := strings.Join(stringvalues , "|") // x00 = null
+     
+      err = stub.PutState(s_requester, []byte(stringByte));
+
+      if err != nil {
+		return nil, err
+	}
+	
+     
+	
+               return nil, nil
+}
+	
 
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
