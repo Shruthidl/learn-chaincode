@@ -17,8 +17,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"strings"
-	
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
