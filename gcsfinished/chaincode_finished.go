@@ -211,6 +211,35 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
             return nil, nil;
         }
 	
+	
+	//enrich data
+	
+	content := strings.Split(arg[6], ",");
+	
+	for i := 0; i < len(content); i++ {
+	txncounter = txncounter + 1;
+	 fmt.Println(content[i]);
+	 content1:=strings.Split(content[i],"|")  
+         var mCount1 int = len(content1);
+         parts1  := make([]string, mCount1 );
+         parts1 = content1;
+         var str bytes.Buffer;
+		
+	 str.WriteString(strconv.Itoa(txncounter));
+          fmt.Println(str);
+          str.WriteString("|");
+          str.WriteString(strconv.Itoa(counter));
+          str.WriteString("|");
+          str.WriteString(content[i]);	
+		
+		var status = string(getStatus(parts1[0]));
+	 fmt.Println(status);
+		var card = string(getCard(parts1[0])));
+        fmt.Println(card);
+		str.WriteString(stub.GetState(card));
+	        str.WriteString((parts1[0]));
+		str.WriteString("|0.25|");
+		str.WriteString(status);
                return nil, nil
 }
 	
