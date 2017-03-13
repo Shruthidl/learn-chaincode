@@ -232,23 +232,23 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           str.WriteString(strconv.Itoa(counter));
           str.WriteString("|");
           str.WriteString(content[i]);	
-		
+	status := "Validated|20-01-2017 07:20AM";	
 	 if(strings.HasPrefix(parts1[0], "1240")){
-         status := "Validated|20-01-2017 07:20AM";
+         status = "Validated|20-01-2017 07:20AM";
 	 }else{
-          status := "Invalid|20-01-2017 07:20AM";
+          status = "Invalid|20-01-2017 07:20AM";
 	 }
    	 fmt.Println(status);
-		
+	card := "364924";	
 	if(strings.HasPrefix(parts1[0], "364924")){
-           card := "364924";
+           card = "364924";
 		
         } else if(strings.HasPrefix(arg, "364914")){
-          card := "364914";
+          card = "364914";
 		
         } else if(strings.HasPrefix(arg, "364927")){
            
-          card := "364927";
+          card = "364927";
         }
 	
                fmt.Println(card);
