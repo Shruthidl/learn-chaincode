@@ -240,6 +240,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	        str.WriteString((parts1[0]));
 		str.WriteString("|0.25|");
 		str.WriteString(status);
+		
+		
+	}
                return nil, nil
 }
 	
