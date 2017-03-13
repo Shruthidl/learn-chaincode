@@ -162,6 +162,21 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	     return []byte("Invalid|20-01-2017 07:20AM"), nil;
     }
 
+ func (t *SimpleChaincode) getCard(stub shim.ChaincodeStubInterface, arg string) ([]byte, error){
+        if(strings.HasPrefix(arg, "364924")){
+           
+		 return []byte("364924"), nil;
+        } else if(strings.HasPrefix(arg, "364914")){
+         
+		 return []byte("364914"), nil;
+        } else if(strings.HasPrefix(arg, "364927")){
+           
+		 return []byte("364927"), nil;
+        }
+       
+	   return []byte("364999"), nil;
+    }
+
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var jsonResp string
