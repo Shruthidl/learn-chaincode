@@ -122,7 +122,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 }
 
 // Adding OutClear files 
-func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
+func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) (int ,error){
   var err error;
   var counter1 int;
   
@@ -203,6 +203,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
+		     
+		     return counter , nill;
 	}
 	
 	if(!strings.HasPrefix(args[6] , "T-")){
@@ -211,18 +213,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
+		
+		 return counter , nill;
 	}
 	
-	if(strings.HasPrefix(parts[7], "Rejected")){
-            // Do not add transaction since the file is rejected
-            // else the transaction would be considered for generating inclear files
-
-             fmt.Println(parts[5]);
-		  err = stub.PutState(s_requester, []byte(stringBytes));
-
-		             
-        }
-	
+		
 	
 	//enrich data
 	
@@ -282,7 +277,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 			}
 	}
 	
-               return nil, nil
+               return counter, nil
 }
 	
 
