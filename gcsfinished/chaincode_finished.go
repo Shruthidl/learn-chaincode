@@ -232,9 +232,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           str.WriteString("|");
           str.WriteString(content[i]);	
 		
-		var status = string(getStatus(parts1[0]));
+		status := string(getStatus(stub,parts1[0]));
 	 fmt.Println(status);
-		var card = string(getCard(parts1[0])));
+		card := string(getCard(stub,parts1[0])));
         fmt.Println(card);
 		str.WriteString(stub.GetState(card));
 	        str.WriteString((parts1[0]));
