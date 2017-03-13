@@ -220,63 +220,6 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		 return []byte(stringBytes2), nil;
 	}
 	
-	//enrich data
-	
-	content := strings.Split(args[7], ",");
-	var m int = len(content);
-          cont  := make([]string, m );
-          cont = content;
-	
-	for i := 0; i < len(cont); i++ {
-	txncounter = txncounter + 1;
-	 fmt.Println(cont[i]);
-	 content1:=strings.Split(cont[i],"|")  
-         var mCount1 int = len(content1);
-         parts1  := make([]string, mCount1 );
-         parts1 = content1;
-		
-		
-        var buffer bytes.Buffer
-		
-	 buffer.WriteString(strconv.Itoa(txncounter));
-          fmt.Println(buffer);
-          buffer.WriteString("|");
-          buffer.WriteString(strconv.Itoa(counter));
-          buffer.WriteString("|");
-          buffer.WriteString(cont[i]);	
-	status := "Validated|20-01-2017 07:20AM";	
-	 if(strings.HasPrefix(parts1[0], "1240")){
-         status = "Validated|20-01-2017 07:20AM";
-	 }else{
-          status = "Invalid|20-01-2017 07:20AM";
-	 }
-   	 fmt.Println(status);
-	card := "364924";	
-	if(strings.HasPrefix(parts1[0], "364924")){
-           card = "364924";
-		
-        } else if(strings.HasPrefix(parts1[0], "364914")){
-          card = "364914";
-		
-        } else if(strings.HasPrefix(parts1[0], "364927")){
-           
-          card = "364927";
-        }
-	
-               fmt.Println(card);
-		 cardname,err :=stub.GetState(card)
-		
-		buffer.WriteString(string(cardname));
-	    buffer.WriteString((parts1[0]));
-		buffer.WriteString("|0.25|");
-		buffer.WriteString(status);
-		
-		err = stub.PutState(strconv.Itoa(txncounter), []byte(buffer.String()));	
-	     
-		if err != nil {
-			return nil, err
-			}
-	}
 	
                return []byte(stringBytes), nil
 }
