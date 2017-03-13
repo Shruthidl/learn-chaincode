@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"bytes"
 	
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
@@ -254,7 +255,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         }
 	
                fmt.Println(card);
-		//buffer.WriteString(string(stub.GetState(card)));
+		buffer.WriteString(string(stub.GetState(card)));
 	        buffer.WriteString((parts1[0]));
 		buffer.WriteString("|0.25|");
 		buffer.WriteString(status);
