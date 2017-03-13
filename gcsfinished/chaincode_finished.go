@@ -203,7 +203,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		  parts[8]="Invalid Header";
 		stringBytes1 := strings.Join(parts, "|") 
 
-		err = stub.PutState(s_requester, []byte(stringBytes2));
+		err = stub.PutState(s_requester, []byte(stringBytes1));
 		     
 		     return []byte(stringBytes1), nil;
 	}
