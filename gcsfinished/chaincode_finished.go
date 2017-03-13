@@ -37,9 +37,6 @@ var value string ;
 var counter int = 0;
 var txncounter int = 0;
 var stringvalues []string;
-var organisations map[string]string;
-var fees map[string]string;
-
 
 
 func main() {
@@ -81,6 +78,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 
 	return nil, errors.New("Received unknown function invocation")
 }
+
+
 // Query is our entry point for queries
 func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("query is running " + function)
@@ -239,9 +238,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	  list =append(list,s);
 	}
 
-	stringByte := strings.Join(list, ",");
+	listByte := strings.Join(list, ",");
 	
-	return []byte(stringByte), nil;
+	return []byte(listByte), nil;
         
     }
 
@@ -259,9 +258,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	  list =append(list,s);
 	}
 
-	stringByte := strings.Join(list, ",");
+	txnsByte := strings.Join(list, ",");
 	
-	return []byte(stringByte), nil;
+	return []byte(txnsByte), nil;
         
     }
 
