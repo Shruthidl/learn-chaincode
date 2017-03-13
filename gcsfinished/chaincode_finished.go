@@ -89,6 +89,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 		return t.read(stub, args)
 	} else if function == "getFiles" {
 	       return t.getFiles(stub, args);
+	} else if function == "getAlltxns" {
+	       return t.getAlltxns(stub, args);
 	}
 	fmt.Println("query did not find func: " + function)
 
@@ -166,8 +168,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
      counter = counter1+1;
     
      counter_s := strconv.Itoa(counter)
-     stringvalues = append(stringvalues , args[0], organisations[args[0]],args[1],args[2],args[3],"In Process",args[4],counter_s)//string array (value)
-     s_requester := counter_s //counter value(key)
+	stringvalues = append(stringvalues ,counter_s,counter_s ,args[2],args[1],args[3],args[4],string(stub.GetState(args[0])),args[1],"In Process")//string array (value)
+        s_requester := counter_s //counter value(key)
 
      stringByte := strings.Join(stringvalues , "|") // x00 = null
      
@@ -189,33 +191,35 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	       var mCount int = len(s1);
                 parts  := make([]string, mCount );
                 parts = s1;
-	         parts[5] = "Validated";
+	         parts[7] = "Validated";
 		stringBytes := strings.Join(parts, "|") 
 
-		err = stub.PutState(args[0], []byte(stringBytes));
+		err = stub.PutState(s_requester, []byte(stringBytes));
 	
 	     if(!strings.HasPrefix(args[6] , "H-")){
 		parts = s1;
-	         parts[5] = "Rejected";
+	         parts[7] = "Rejected";
 		stringBytes := strings.Join(parts, "|") 
 
-		err = stub.PutState(args[0], []byte(stringBytes));
+		err = stub.PutState(s_requester, []byte(stringBytes));
 	}
 	
 	if(!strings.HasPrefix(args[6] , "T-")){
 		parts = s1;
-	         parts[5] = "Rejected";
+	         parts[7] = "Rejected";
 		stringBytes := strings.Join(parts, "|") 
 
-		err = stub.PutState(args[0], []byte(stringBytes));
+		err = stub.PutState(s_requester, []byte(stringBytes));
 	}
 	
-	if(strings.HasPrefix(parts[5], "Rejected")){
+	if(strings.HasPrefix(parts[7], "Rejected")){
             // Do not add transaction since the file is rejected
             // else the transaction would be considered for generating inclear files
 
              fmt.Println(parts[5]);
-            return nil, nil;
+		  err = stub.PutState(s_requester, []byte(stringBytes));
+
+		             
         }
 	
 	
@@ -281,12 +285,32 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 }
 	
 
-// Return specific LOC in the system
+// Return all files
     func (t *SimpleChaincode) getFiles(stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
      
     	var list []string;
 	
 	for i := 1; i <=counter; i++ {
+	 valueAsBytes , err := stub.GetState(strconv.Itoa(i));
+	if err != nil {
+	 return nil,err	
+	}
+	  s:=string(valueAsBytes);
+	  list =append(list,s);
+	}
+
+	stringByte := strings.Join(list, ",");
+	
+	return []byte(stringByte), nil;
+        
+    }
+
+// Return all transactions
+    func (t *SimpleChaincode) getAlltxns (stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
+     
+    	var list []string;
+	
+	for i := 1; i <=txncounter; i++ {
 	 valueAsBytes , err := stub.GetState(strconv.Itoa(i));
 	if err != nil {
 	 return nil,err	
