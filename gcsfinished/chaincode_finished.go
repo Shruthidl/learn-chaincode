@@ -243,10 +243,10 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	if(strings.HasPrefix(parts1[0], "364924")){
            card = "364924";
 		
-        } else if(strings.HasPrefix(arg, "364914")){
+        } else if(strings.HasPrefix(parts1[0], "364914")){
           card = "364914";
 		
-        } else if(strings.HasPrefix(arg, "364927")){
+        } else if(strings.HasPrefix(parts1[0], "364927")){
            
           card = "364927";
         }
