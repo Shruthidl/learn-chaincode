@@ -85,7 +85,9 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	// Handle different functions
 	if function == "read" { //read a variable
 		return t.read(stub, args)
-	} 
+	} else if function == "getFiles" {
+	       return t.getFiles(stub, args);
+	}
 	fmt.Println("query did not find func: " + function)
 
 	return nil, errors.New("Received unknown function query")
@@ -272,6 +274,23 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
                return nil, nil
 }
 	
+
+// Return specific LOC in the system
+    func (t *SimpleChaincode) getFiles(stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
+     
+    	file_string,err :=stub.GetState(args[0])
+	
+    	if err != nil {
+		return nil, err
+	}
+    	
+    	s := []string{string(file_string)};
+        
+        final_string := strings.Join(s, "|");
+    	
+        return []byte(final_string), nil;
+        
+    }
 
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
