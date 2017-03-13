@@ -33,6 +33,7 @@ var value string ;
 
    
 var counter int = 0;
+var txncounter int = 0;
 var stringvalues []string;
 
 
