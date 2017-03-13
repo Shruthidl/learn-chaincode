@@ -250,8 +250,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           card := "364927";
         }
 	
-        fmt.Println(card);
-		str.WriteString(stub.GetState(card));
+               fmt.Println(card);
+		str.WriteString(string(stub.GetState(card)));
 	        str.WriteString((parts1[0]));
 		str.WriteString("|0.25|");
 		str.WriteString(status);
