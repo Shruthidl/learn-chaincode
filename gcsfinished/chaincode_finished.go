@@ -168,7 +168,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
      counter = counter1+1;
     
      counter_s := strconv.Itoa(counter)
-	stringvalues = append(stringvalues ,counter_s,counter_s ,args[2],args[1],args[3],args[4],string(stub.GetState(args[0])),args[1],"In Process")//string array (value)
+	acq_name,err :=stub.GetState(args[0])
+	stringvalues = append(stringvalues ,counter_s,counter_s ,args[2],args[1],args[3],args[4],string(acq_name),args[1],"In Process")//string array (value)
         s_requester := counter_s //counter value(key)
 
      stringByte := strings.Join(stringvalues , "|") // x00 = null
