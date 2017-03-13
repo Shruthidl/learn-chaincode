@@ -204,7 +204,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
 		     
-		     return counter , nill;
+		     return counter , nil;
 	}
 	
 	if(!strings.HasPrefix(args[6] , "T-")){
@@ -214,7 +214,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
 		
-		 return counter , nill;
+		 return counter , nil;
 	}
 	
 		
