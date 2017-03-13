@@ -180,14 +180,36 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	s1 := strings.Split(string(value), "|");
 	
 	       var mCount int = len(s1);
-               parts  := make([]string, mCount );
+                parts  := make([]string, mCount );
                 parts = s1;
 	         parts[5] = "Validated";
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(args[0], []byte(stringBytes));
 	
-	     
+	     if(!strings.HasPrefix(args[6] , "H-")){
+		parts = s1;
+	         parts[5] = "Rejected";
+		stringBytes := strings.Join(parts, "|") 
+
+		err = stub.PutState(args[0], []byte(stringBytes));
+	}
+	
+	if(!strings.HasPrefix(args[6] , "T-")){
+		parts = s1;
+	         parts[5] = "Rejected";
+		stringBytes := strings.Join(parts, "|") 
+
+		err = stub.PutState(args[0], []byte(stringBytes));
+	}
+	
+	if(strings.HasPrefix(parts[5], "Rejected")){
+            // Do not add transaction since the file is rejected
+            // else the transaction would be considered for generating inclear files
+
+             fmt.Println(parts[5]);
+            return nil, nil;
+        }
 	
                return nil, nil
 }
