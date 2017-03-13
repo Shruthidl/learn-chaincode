@@ -37,6 +37,7 @@ var counter int = 0;
 var txncounter int = 0;
 var stringvalues []string;
 var organisations map[string]string;
+var fees map[string]string;
 
 
 
@@ -131,6 +132,14 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         organisations["1234123400"] = "|Src Bank - 29";
 	
 	
+        fees["364924"] = "|0.25|";
+        fees["364914"] = "|0.25|";
+        fees["364927"] = "|0.25|";
+        fees["4321432100"] = "|0.25|";
+        fees["1234123400"] = "|0.25|";
+
+	
+	
 	// add out clear files
     valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
     s:=string(valAsbytes);
@@ -149,7 +158,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
      counter = counter1+1;
     
      counter_s := strconv.Itoa(counter)
-     stringvalues = append(args,counter_s)//string array (value)
+     stringvalues = append(stringvalues , args[0], organisations[args[0]],args[1],args[2],args[3],"In Process",args[4],counter_s)//string array (value)
      s_requester := counter_s //counter value(key)
 
      stringByte := strings.Join(stringvalues , "|") // x00 = null
@@ -205,11 +214,14 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	//enrich data
 	
 	content := strings.Split(args[6], ",");
+	var m int = len(content);
+          cont  := make([]string, m );
+          cont = content;
 	
-	for i := 0; i < len(content); i++ {
+	for i := 0; i < len(cont); i++ {
 	txncounter = txncounter + 1;
-	 fmt.Println(content[i]);
-	 content1:=strings.Split(content[i],"|")  
+	 fmt.Println(cont[i]);
+	 content1:=strings.Split(cont[i],"|")  
          var mCount1 int = len(content1);
          parts1  := make([]string, mCount1 );
          parts1 = content1;
@@ -222,7 +234,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           buffer.WriteString("|");
           buffer.WriteString(strconv.Itoa(counter));
           buffer.WriteString("|");
-          buffer.WriteString(content[i]);	
+          buffer.WriteString(cont[i]);	
 	status := "Validated|20-01-2017 07:20AM";	
 	 if(strings.HasPrefix(parts1[0], "1240")){
          status = "Validated|20-01-2017 07:20AM";
