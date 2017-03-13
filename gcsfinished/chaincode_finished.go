@@ -127,18 +127,6 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	if err != nil {
 		return nil, err
 	}
-	err := stub.PutState("364927",[]byte("|My Bank - 140"))
-	if err != nil {
-		return nil, err
-	}
-	err := stub.PutState("4321432100",[]byte("|DCB Bank - 25"))
-	if err != nil {
-		return nil, err
-	}
-	err := stub.PutState("1234123400",[]byte("|Src Bank - 29"))
-	if err != nil {
-		return nil, err
-	}
 	
 	
 	// add out clear files
