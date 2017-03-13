@@ -278,17 +278,20 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 // Return specific LOC in the system
     func (t *SimpleChaincode) getFiles(stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
      
-    	file_string,err :=stub.GetState(args[0])
+    	var list []string;
 	
-    	if err != nil {
-		return nil, err
+	for i := 1; i <=counter; i++ {
+	 valueAsBytes , err := stub.GetState(strconv.Itoa(i));
+	if err != nil {
+	 return nil,err	
 	}
-    	
-    	s := []string{string(file_string)};
-        
-        final_string := strings.Join(s, "|");
-    	
-        return []byte(final_string), nil;
+	  s:=string(valueAsBytes);
+	  list =append(list,s);
+	}
+
+	stringByte := strings.Join(list, ",");
+	
+	return []byte(stringByte), nil;
         
     }
 
