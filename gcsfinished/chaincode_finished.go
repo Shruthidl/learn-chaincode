@@ -36,6 +36,7 @@ var value string ;
 var counter int = 0;
 var txncounter int = 0;
 var stringvalues []string;
+var organisations map[string]string;
 
 
 
@@ -123,26 +124,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
   var counter1 int;
   
 	//prepareData
-	err = stub.PutState("364924",[]byte("|City Bank - 130"))
-	if err != nil {
-		return nil, err
-	}
-	err = stub.PutState("364914",[]byte("|I Bank - 120"))
-	if err != nil {
-		return nil, err
-	}
-	err = stub.PutState("364927",[]byte("|My Bank - 140"))
-	if err != nil {
-		return nil, err
-	}
-	err = stub.PutState("4321432100",[]byte("|DCB Bank - 25"))
-	if err != nil {
-		return nil, err
-	}
-	err = stub.PutState("1234123400",[]byte("|Src Bank - 29"))
-	if err != nil {
-		return nil, err
-	}
+	organisations["364924"] = "|City Bank - 130";
+        organisations["364914"] = "|I Bank - 120";
+        organisations["364927"] = "|My Bank - 140";
+        organisations["4321432100"] = "|DCB Bank - 25";
+        organisations["1234123400"] = "|Src Bank - 29";
 	
 	
 	// add out clear files
