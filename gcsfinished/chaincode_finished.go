@@ -176,10 +176,40 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         s_requester := counter_s //counter value(key)
         	
 	
-	       var mCount int = len(stringvalues);
+	      var mCount int = len(stringvalues);
                 parts  := make([]string, mCount );
                 parts = stringvalues;
-	         parts[7] = "Validated";
+	       
+	
+		if(!strings.HasPrefix(args[5] , "H-")){
+			
+			 parts[7] = "Rejected";
+
+			stringBytes1 := strings.Join(parts, "|") 
+
+			err = stub.PutState(s_requester, []byte(stringBytes1));
+			if err != nil {
+				return nil, err
+			}
+
+			     return nil, nil;
+		}
+	
+		if(!strings.HasPrefix(args[6] , "T-")){
+			
+			 parts[7] = "Rejected";
+
+			stringBytes2 := strings.Join(parts, "|") 
+
+			err = stub.PutState(s_requester, []byte(stringBytes2));
+			if err != nil {
+				return nil, err
+			}
+
+			 return nil, nil;
+		}
+
+	        parts[7] = "Validated";
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
