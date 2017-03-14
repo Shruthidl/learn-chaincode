@@ -179,7 +179,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 	
 	 //stringvalues = append(args,counter_s)//string array (value)
-	stringvalues := append(stringslice,counter_s)//string array (value)
+	stringvalues := append(args,counter_s)//string array (value)
      s_requester := counter_s //counter value(key)
      stringByte := strings.Join(stringvalues , "|") // x00 = null
      
