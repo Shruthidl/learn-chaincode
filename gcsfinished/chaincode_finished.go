@@ -93,6 +93,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	       return t.getFiles(stub, args);
 	} else if function == "getAlltxns" {
 	       return t.getAlltxns(stub, args);
+	} else if function == "getCurrentFileId" {
+	       return t.getCurrentFileId(stub, args);
 	}
 	fmt.Println("query did not find func: " + function)
 
