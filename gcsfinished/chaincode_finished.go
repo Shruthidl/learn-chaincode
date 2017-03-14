@@ -126,6 +126,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
   var counter1 int;
+  var stringslice []string;
   
 	//prepareData
 	/*err = stub.PutState("364924",[]byte("City Bank - 130"))
@@ -179,7 +180,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 	
 	 //stringvalues = append(args,counter_s)//string array (value)
-	stringvalues := append(args,counter_s)//string array (value)
+	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
+	stringvalues = append(stringslice,counter_s)//string array (value)
      s_requester := counter_s //counter value(key)
      stringByte := strings.Join(stringvalues , "|") // x00 = null
      
