@@ -193,7 +193,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	}
 	
 	//precapture
-	/* value,err :=stub.GetState(strconv.Itoa(counter))
+	 value,err :=stub.GetState(strconv.Itoa(counter))
 		if err != nil {
 		return nil, err
 	}
@@ -209,7 +209,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
 	
-	     if(!strings.HasPrefix(args[5] , "H-")){
+	    /* if(!strings.HasPrefix(args[5] , "H-")){
 		parts = s1;
 	         parts[7] = "Rejected";
 		
