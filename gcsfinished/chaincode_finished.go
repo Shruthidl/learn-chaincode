@@ -127,7 +127,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
   var counter1 int;
   
 	//prepareData
-	err = stub.PutState("364924",[]byte("City Bank - 130"))
+	/*err = stub.PutState("364924",[]byte("City Bank - 130"))
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	if err != nil {
 		return nil, err
 	}
-
+*/
 	
 	
 	// add out clear files
@@ -168,11 +168,15 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
      counter = counter1+1;
 	
 	    
-     counter_s := strconv.Itoa(counter)
-	acq_name,err :=stub.GetState(args[0])
-	stringvalues = append(stringvalues ,counter_s,counter_s ,args[2],args[1],args[3],args[4],string(acq_name),"In Process")//string array (value)
-        s_requester := counter_s //counter value(key)
+    // counter_s := strconv.Itoa(counter)
+	//acq_name,err :=stub.GetState(args[0])
+	//stringvalues = append(stringvalues ,counter_s,counter_s ,args[2],args[1],args[3],args[4],string(acq_name),"In Process")//string array (value)
+        //s_requester := counter_s //counter value(key)
 
+	
+	counter_s := strconv.Itoa(counter)
+     stringvalues = append(args,counter_s)//string array (value)
+     s_requester := counter_s //counter value(key)
      stringByte := strings.Join(stringvalues , "|") // x00 = null
      
       err = stub.PutState(s_requester, []byte(stringByte));
