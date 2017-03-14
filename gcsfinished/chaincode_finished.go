@@ -262,7 +262,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		 cardname,err :=stub.GetState(card)
 		
 		buffer.WriteString(string(cardname));
-	    buffer.WriteString((parts1[0]));
+	       buffer.WriteString((parts1[0]));
 		buffer.WriteString("|0.25|");
 		buffer.WriteString(status);
 		
@@ -271,6 +271,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		if err != nil {
 			return nil, err
 			}
+	}
 	     
 	  
 	
@@ -279,7 +280,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 
 // Return all files
-    func (t *SimpleChaincode) getFiles(stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
+    func (t *SimpleChaincode) getFiles (stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
      
     	var list []string;
 	
