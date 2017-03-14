@@ -171,15 +171,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
 	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
-	stringslice = append(stringslice,counter_s,counter_s,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
-	stringvalues = stringslice//string array (value)
+	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
+	stringvalues = append(stringslice,counter_s)//string array (value)
         s_requester := counter_s //counter value(key)
         	
 	
-	      /*var mCount int = len(stringvalues);
-                parts  := make([]string, mCount );
-                parts = stringvalues;
-	        parts[7] = "Validated";*/
 		stringBytes := strings.Join(stringvalues, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
@@ -187,6 +183,10 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 				return nil, err
 			}
 	
+	      /*var mCount int = len(stringvalues);
+                parts  := make([]string, mCount );
+                parts = stringvalues;
+	        parts[7] = "Validated";*/
 	    /* if(!strings.HasPrefix(args[5] , "H-")){
 		parts = s1;
 	         parts[7] = "Rejected";
