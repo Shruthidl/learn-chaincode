@@ -319,6 +319,16 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         
     }
 
+
+// Return getCurrentFileId
+   func (t *SimpleChaincode) getCurrentFileId (stub shim.ChaincodeStubInterface, args []string)([]byte,error){
+	   
+	   return []byte(strconv.Itoa(counter)),nil;
+	   
+   }
+
+ 
+
 // read - query function to read key/value pair
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var jsonResp string
