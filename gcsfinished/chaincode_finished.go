@@ -71,8 +71,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.write(stub, args)
 	} else if function == "addOutClearFile" {
 		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
-		stringslice := []string{args[2], args[1],args[3],args[4],args[0],"In Process"};
-		return t.addOutClearFile(stub, args,stringslice)
+		//stringslice := []string{args[2], args[1],args[3],args[4],args[0],"In Process"};
+		return t.addOutClearFile(stub, args)
 	} 
 	
 	fmt.Println("invoke did not find func: " + function)
@@ -123,7 +123,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 }
 
 // Adding OutClear files 
-func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string, stringslice []string) ([]byte ,error){
+func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
   var counter1 int;
   
