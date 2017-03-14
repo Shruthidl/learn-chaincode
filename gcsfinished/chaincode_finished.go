@@ -129,7 +129,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
   var stringslice []string;
   
 	//prepareData
-	/*err = stub.PutState("364924",[]byte("City Bank - 130"))
+	err = stub.PutState("364924",[]byte("City Bank - 130"))
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	if err != nil {
 		return nil, err
 	}
-*/
+
 	
 	
 	// add out clear files
@@ -193,7 +193,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	}
 	
 	//precapture
-	/* value,err :=stub.GetState(strconv.Itoa(counter))
+	 value,err :=stub.GetState(strconv.Itoa(counter))
 		if err != nil {
 		return nil, err
 	}
@@ -217,7 +217,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes1));
 		     
-		     return []byte(stringBytes1), nil;
+		     return nil, nil;
 	}
 	
 	if(!strings.HasPrefix(args[6] , "T-")){
@@ -228,8 +228,8 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		err = stub.PutState(s_requester, []byte(stringBytes2));
 		
-		 return []byte(stringBytes2), nil;
-	}*/
+		 return nil, nil;
+	}
 	
 	
               return nil, nil
