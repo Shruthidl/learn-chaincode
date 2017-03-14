@@ -193,13 +193,13 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	}*/
 	
 	//precapture
-	 value,err :=stub.GetState(strconv.Itoa(counter))
+	/* value,err :=stub.GetState(strconv.Itoa(counter))
 		if err != nil {
 		return nil, err
-	}
+	}*/
 	
 		
-	s1 := strings.Split(string(value), "|");
+	s1 := strings.Split(string(stringByte), "|");
 	
 	       var mCount int = len(s1);
                 parts  := make([]string, mCount );
