@@ -186,11 +186,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
      s_requester := counter_s //counter value(key)
      stringByte := strings.Join(stringvalues , "|") // x00 = null
      
-      err = stub.PutState(s_requester, []byte(stringByte));
+     /* err = stub.PutState(s_requester, []byte(stringByte));
 
       if err != nil {
 		return nil, err
-	}
+	}*/
 	
 	//precapture
 	 value,err :=stub.GetState(strconv.Itoa(counter))
@@ -208,6 +208,9 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
+			if err != nil {
+				return nil, err
+			}
 	
 	    /* if(!strings.HasPrefix(args[5] , "H-")){
 		parts = s1;
