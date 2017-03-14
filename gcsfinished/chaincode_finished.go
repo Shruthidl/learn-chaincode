@@ -156,7 +156,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	
      if len(s) != 0 {
 	     lastByByte := s[len(s)+1]
-             counter1, err =  strconv.Atoi(lastByByte)
+	     counter1, err =  strconv.Atoi(string(lastByByte))
  		if err != nil {
      			return  nil,err
   	         }
