@@ -267,11 +267,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		buffer.WriteString(status);
 		transaction:= buffer.String();
 		 fmt.Println(transaction);
-		/*err = stub.PutState(strconv.Itoa(txncounter), []byte(buffer.String()));	
+		//err = stub.PutState(strconv.Itoa(txncounter), []byte(buffer.String()));	
 	     
 		if err != nil {
 			return nil, err
-			}*/
+			}
 	}
 	     
 	  
