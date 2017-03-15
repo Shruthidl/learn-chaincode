@@ -104,6 +104,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	       return t.getAlltxns(stub, args);
 	} else if function == "getCurrentFileId" {
 	       return t.getCurrentFileId(stub, args);
+	} else if function == "getCounts" {
+	       return t.getCounts(stub, args);
 	}
 	fmt.Println("query did not find func: " + function)
 
@@ -469,6 +471,12 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
 	   return []byte(strconv.Itoa(counter)),nil;
 	   
    }
+
+// Return count
+func (t *SimpleChaincode) getCounts(stub shim.ChaincodeStubInterface, args []string)([]byte,error){
+       
+	return []byte("Files:",strconv.Itoa(counter),",Txns:",strconv.Itoa(txncounter)),nil;
+    }
 
  
 
