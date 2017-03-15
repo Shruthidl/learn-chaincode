@@ -175,16 +175,26 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
 	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
-	stringvalues = append(stringslice,counter_s,counter_s);//string array (value)
+	
+        stringvalues := make([]string, len(stringslice) + 1)
+        stringvalues[0] = "counter_s"
+	copy(stringvalues[1:], stringslice)
+	stringvalues[1] = "counter_s"
+        copy(stringvalues[2:], stringslice)
+        stringslice = stringvalues
+	
+	
+	
+	//stringvalues = append(stringslice,counter_s,counter_s);//string array (value)
         s_requester := counter_s //counter value(key)
           	
-	     var mCount int = len(stringvalues);
+	     var mCount int = len(stringslice);
                 parts  := make([]string, mCount );
-                parts = stringvalues;
+                parts = stringslice;
 	
 		 if(!strings.HasPrefix(args[5] , "H-")){
 			
-			 parts[5] = "Rejected";
+			 parts[7] = "Rejected";
 
 			stringBytes1 := strings.Join(parts, "|") 
 
@@ -197,7 +207,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 		if(!strings.HasPrefix(args[6] , "T-")){
 			
-			 parts[5] = "Rejected";
+			 parts[7] = "Rejected";
 
 			stringBytes2 := strings.Join(parts, "|") 
 
@@ -209,7 +219,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		}
 	
 	
-	        parts[5] = "Validated";
+	        parts[7] = "Validated";
 		stringBytes := strings.Join(parts, "|") 
 
 		err = stub.PutState(s_requester, []byte(stringBytes));
@@ -241,7 +251,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           buffer.WriteString(strconv.Itoa(counter));
           buffer.WriteString("|");
           buffer.WriteString(cont[i]);	
-	status := "Validated|20-01-2017 07:20AM";	
+	  status := "Validated|20-01-2017 07:20AM";	
 	 if(strings.HasPrefix(parts1[0], "1240")){
          status = "Validated|20-01-2017 07:20AM";
 	 }else{
@@ -264,7 +274,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 		 cardname,err :=stub.GetState(card)
 		
 		buffer.WriteString(string(cardname));
-	       buffer.WriteString((parts1[0]));
+	        buffer.WriteString((parts1[0]));
 		buffer.WriteString("|0.25|");
 		buffer.WriteString(status);
 		
