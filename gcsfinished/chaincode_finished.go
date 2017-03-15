@@ -287,7 +287,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 // mark transaction cleared
 func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
-        var s = strings.Split(args[0], ",");;
+        var s = args;
         var mCount int = len(s);
         parts  := make([]string, mCount );
    	parts = s;
@@ -309,6 +309,35 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
 	return nil, nil
     }
 
+
+//mark files cleared
+func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
+	var s = args;
+        var mCount int = len(s);
+        parts  := make([]string, mCount );
+   	parts = s;
+         for j := 0; j < len(parts); j++ {
+          //  parts[x] = s.split(delim).toString();
+          //  files[parseInt(parts[x])].file_status = "Cleared";
+       valueAsBytes , err := stub.GetState(parts[j]);
+	if err != nil {
+	 return nil,err	
+	}
+		 s1:=string(valueAsBytes);
+	var s2 = strings.Split(s1, "|");;
+        var mCount int = len(s2);
+        parts1  := make([]string, mCount );
+   	parts1 = s2;
+	parts1[5] = "Cleared";	 
+       stringbyte := strings.Join(parts1, "|") 
+	err = stub.PutState(parts[j], stringbyte);	
+	     
+		if err != nil {
+			return nil, err
+			}
+        }
+        	return nil, nil
+    }
 
 
 // Return all files
