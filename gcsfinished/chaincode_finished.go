@@ -423,7 +423,7 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
 	}
 	  s:=string(valueAsBytes);
 	  var s2 = strings.Split(s, "|");
-          var mCount int = len(s2);
+       
           parts1  := make([]string, len(s2)+1);
 	  parts1[0] = strconv.Itoa(i)
 	  copy(parts1[1:], s2)
