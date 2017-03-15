@@ -475,7 +475,12 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
 // Return count
 func (t *SimpleChaincode) getCounts(stub shim.ChaincodeStubInterface, args []string)([]byte,error){
        
-	return []byte("Files:",strconv.Itoa(counter),",Txns:",strconv.Itoa(txncounter)),nil;
+	        var str bytes.Buffer;
+		str.WriteString("Files:");
+                str.WriteString(strconv.Itoa(counter));
+	        str.WriteString("Txns:");
+                str.WriteString(strconv.Itoa(txncounter));
+	        return []byte(str.STring()),nil;
     }
 
  
