@@ -74,6 +74,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
 		//stringslice := []string{args[2], args[1],args[3],args[4],args[0],"In Process"};
 		return t.addOutClearFile(stub, args)
+	} else if function == "markTxnCleared" {
+		fmt.Println("**** First argument in markTxnCleared:****" + args[0])
+		return t.markTxnCleared(stub, args)
 	} 
 	
 	fmt.Println("invoke did not find func: " + function)
@@ -281,6 +284,31 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
               return nil, nil
 }
 	
+
+// mark transaction cleared
+func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
+        var s = strings.Split(args, ",");;
+        var mCount int = len(s);
+        parts  := make([]string, mCount );
+   	parts = s;
+        for j := 0; j < len(parts); j++ {
+           
+      valueAsBytes , err := stub.GetState("t"+parts[j]);
+	if err != nil {
+	 return nil,err	
+	}
+ 	 var str bytes.Buffer;
+		str.WriteString(string(valueAsBytes));
+                str.WriteString("|Cleared");
+                err = stub.PutState("t"+parts[j], []byte(str.String()));	
+	     
+		if err != nil {
+			return nil, err
+			}
+        }
+    }
+
+
 
 // Return all files
     func (t *SimpleChaincode) getFiles (stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
