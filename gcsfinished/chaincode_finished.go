@@ -287,7 +287,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 
 // mark transaction cleared
 func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
-        var s = strings.Split(args, ",");;
+        var s = strings.Split(args[0], ",");;
         var mCount int = len(s);
         parts  := make([]string, mCount );
    	parts = s;
