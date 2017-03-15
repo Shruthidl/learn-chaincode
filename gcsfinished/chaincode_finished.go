@@ -77,6 +77,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	} else if function == "markTxnCleared" {
 		fmt.Println("**** First argument in markTxnCleared:****" + args[0])
 		return t.markTxnCleared(stub, args)
+	} else if function == "markFilesCleared" {
+		fmt.Println("**** First argument in markFilesCleared:****" + args[0])
+		return t.markFilesCleared(stub, args)
 	} 
 	
 	fmt.Println("invoke did not find func: " + function)
