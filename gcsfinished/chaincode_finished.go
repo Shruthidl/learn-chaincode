@@ -72,7 +72,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.write(stub, args)
 	} else if function == "addOutClearFile" {
 		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
-		//stringslice := []string{args[2], args[1],args[3],args[4],args[0],"In Process"};
 		return t.addOutClearFile(stub, args)
 	} else if function == "addInClearFile" {
 		fmt.Println("**** First argument in addInClearFile:****" + args[0])
@@ -186,10 +185,6 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
 	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
-	  /*  s1 := make([]string, len(stringslice) + 1)
-            s1[0] = "1"
-	    copy(s1[1:], stringslice)
-	stringvalues =s1;*/
 	stringvalues = append(stringslice,counter_s,counter_s);//string array (value)
         s_requester := counter_s //counter value(key)
           	
@@ -232,15 +227,15 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 				return nil, err
 			}
 	
-	//enrich data
 	
+	//enrich data
 	content := strings.Split(args[7], ",");
 	var m int = len(content);
           cont  := make([]string, m );
           cont = content;
 	
-	for i := 0; i < len(cont); i++ {
-	txncounter = txncounter + 1;
+  for i := 0; i < len(cont); i++ {
+	 txncounter = txncounter + 1;
 	 fmt.Println(cont[i]);
 	 content1:=strings.Split(cont[i],"|")  
          var mCount1 int = len(content1);
@@ -389,20 +384,19 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
         var mCount int = len(s);
         parts  := make([]string, mCount );
    	parts = s;
-         for j := 0; j < len(parts); j++ {
-          //  parts[x] = s.split(delim).toString();
-          //  files[parseInt(parts[x])].file_status = "Cleared";
-       valueAsBytes , err := stub.GetState(parts[j]);
+         
+	for j := 0; j < len(parts); j++ {
+        valueAsBytes , err := stub.GetState(parts[j]);
 	if err != nil {
 	 return nil,err	
 	}
-		 s1:=string(valueAsBytes);
+	s1:=string(valueAsBytes);
 	var s2 = strings.Split(s1, "|");;
         var mCount int = len(s2);
         parts1  := make([]string, mCount );
    	parts1 = s2;
 	parts1[5] = "Cleared";	 
-       stringbyte := strings.Join(parts1, "|") 
+        stringbyte := strings.Join(parts1, "|") 
 		 err = stub.PutState(parts[j],[]byte(stringbyte));	
 	     
 		if err != nil {
@@ -469,8 +463,8 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
    func (t *SimpleChaincode) getCurrentFileId (stub shim.ChaincodeStubInterface, args []string)([]byte,error){
 	   
 	   return []byte(strconv.Itoa(counter)),nil;
-	   
-   }
+}
+
 
 // Return count
 func (t *SimpleChaincode) getCounts(stub shim.ChaincodeStubInterface, args []string)([]byte,error){
