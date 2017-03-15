@@ -74,6 +74,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
 		//stringslice := []string{args[2], args[1],args[3],args[4],args[0],"In Process"};
 		return t.addOutClearFile(stub, args)
+	} else if function == "addInClearFile" {
+		fmt.Println("**** First argument in addInClearFile:****" + args[0])
+		return t.addInClearFile(stub, args)
 	} else if function == "markTxnCleared" {
 		fmt.Println("**** First argument in markTxnCleared:****" + args[0])
 		return t.markTxnCleared(stub, args)
@@ -287,6 +290,68 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
               return nil, nil
 }
 	
+
+// Adding InClear files 
+func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
+  var err error;
+  var counter1 int;
+  var stringslice []string;
+  
+	//prepareData
+	err = stub.PutState("364924",[]byte("City Bank - 130"))
+	if err != nil {
+		return nil, err
+	}
+	err = stub.PutState("364914",[]byte("I Bank - 120"))
+	if err != nil {
+		return nil, err
+	}
+	err = stub.PutState("364927",[]byte("My Bank - 140"))
+	if err != nil {
+		return nil, err
+	}
+	err = stub.PutState("4321432100",[]byte("DCB Bank - 25"))
+	if err != nil {
+		return nil, err
+	}
+	err = stub.PutState("1234123400",[]byte("Src Bank - 29"))
+	if err != nil {
+		return nil, err
+	}
+	
+	valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
+        s:=string(valAsbytes);
+	
+     if len(s) != 0 {
+	     lastByByte := s[len(s)-1:]
+             counter1, err =  strconv.Atoi(lastByByte)
+ 		if err != nil {
+     			return  nil,err
+  	         }
+	
+   	  } else {
+             counter1 = 0
+    	   }
+   
+       counter = counter1+1;
+	
+	counter_s := strconv.Itoa(counter)
+	acq_name,err :=stub.GetState(args[0])
+	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
+	
+	stringvalues = append(stringslice,counter_s,counter_s);//string array (value)
+        s_requester := counter_s //counter value(key)
+       
+		stringBytes := strings.Join(stringvalues, "|") 
+
+		err = stub.PutState(s_requester, []byte(stringBytes));
+			if err != nil {
+				return nil, err
+			}
+	  return nil, nil
+}
+
+
 
 // mark transaction cleared
 func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
