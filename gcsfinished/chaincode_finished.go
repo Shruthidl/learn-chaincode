@@ -333,7 +333,7 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
    	parts1 = s2;
 	parts1[5] = "Cleared";	 
        stringbyte := strings.Join(parts1, "|") 
-	err = stub.PutState(parts[j], stringbyte);	
+		 err = stub.PutState(parts[j],[]byte(stringbyte));	
 	     
 		if err != nil {
 			return nil, err
