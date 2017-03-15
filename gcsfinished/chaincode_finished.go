@@ -480,7 +480,7 @@ func (t *SimpleChaincode) getCounts(stub shim.ChaincodeStubInterface, args []str
                 str.WriteString(strconv.Itoa(counter));
 	        str.WriteString("Txns:");
                 str.WriteString(strconv.Itoa(txncounter));
-	        return []byte(str.STring()),nil;
+	        return []byte(str.String()),nil;
     }
 
  
