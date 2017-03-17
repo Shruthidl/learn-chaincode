@@ -361,7 +361,7 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
    	parts = s;
         for j := 0; j < len(parts); j++ {
            
-      valueAsBytes , err := stub.GetState("t"+parts[j]);
+		valueAsBytes , err := stub.GetState("t"+strconv.Itoa(parts[j]));
 	if err != nil {
 	 return nil,err	
 	}
@@ -386,7 +386,7 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
    	parts = s;
          
 	for j := 0; j < len(parts); j++ {
-        valueAsBytes , err := stub.GetState(parts[j]);
+		valueAsBytes , err := stub.GetState(strconv.Itoa(parts[j]));
 	if err != nil {
 	 return nil,err	
 	}
