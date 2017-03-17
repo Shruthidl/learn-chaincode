@@ -295,7 +295,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
   var counter2 int;
-  var stringslice []string;
+  var stringslice1 []string;
   
 	//prepareData
 	err = stub.PutState("364924",[]byte("City Bank - 130"))
@@ -337,9 +337,9 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 	
 	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
-	stringslice = append(stringslice,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
+	stringslice1 = append(stringslice1,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
 	
-	stringvalues = append(stringslice,counter_s,counter_s);//string array (value)
+	stringvalues = append(stringslice1,counter_s,counter_s);//string array (value)
         s_requester := counter_s //counter value(key)
        
 		stringBytes := strings.Join(stringvalues, "|") 
@@ -361,7 +361,7 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
    	parts = s;
         for j := 0; j < len(parts); j++ {
            
-		valueAsBytes , err := stub.GetState("t"+strconv.Itoa(parts[j]));
+		valueAsBytes , err := stub.GetState("t"+parts[j]);
 	if err != nil {
 	 return nil,err	
 	}
@@ -386,7 +386,7 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
    	parts = s;
          
 	for j := 0; j < len(parts); j++ {
-		valueAsBytes , err := stub.GetState(strconv.Itoa(parts[j]));
+		valueAsBytes , err := stub.GetState(parts[j]);
 	if err != nil {
 	 return nil,err	
 	}
