@@ -294,7 +294,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 // Adding InClear files 
 func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
-  var counter1 int;
+  //var counter1 int;
   var stringslice []string;
   
 	//prepareData
