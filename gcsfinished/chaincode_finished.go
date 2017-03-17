@@ -228,7 +228,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 			}
 	
 	
-	//enrich data
+	//enrichData
 	content := strings.Split(args[7], ",");
 	var m int = len(content);
           cont  := make([]string, m );
