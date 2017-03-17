@@ -319,10 +319,10 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 		return nil, err
 	}
 	
-	valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
-        s:=string(valAsbytes);
+	/* valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
+       s:=string(valAsbytes);
 	
-     /*if len(s) != 0 {
+    if len(s) != 0 {
 	     lastByByte := s[len(s)-1:]
              counter1, err =  strconv.Atoi(lastByByte)
  		if err != nil {
