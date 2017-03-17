@@ -429,7 +429,6 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
 	  s2= append(s2[:9], s2[9+1:]...)	
 	  s2= append(s2[:8], s2[8+1:]...)	
 	  s = strings.Join(s2, "|") 
-	  s = strings.Join(s2, strconv.Itoa(counter)) 
 	  list =append(list,s);
 	}
 
