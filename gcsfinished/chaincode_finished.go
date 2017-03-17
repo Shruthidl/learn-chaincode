@@ -294,7 +294,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 // Adding InClear files 
 func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args []string) ([]byte ,error){
   var err error;
-  //var counter1 int;
+  var counter2 int;
   var stringslice []string;
   
 	//prepareData
@@ -319,21 +319,21 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 		return nil, err
 	}
 	
-	/* valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
+	valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
        s:=string(valAsbytes);
 	
-    if len(s) != 0 {
+       if len(s) != 0 {
 	     lastByByte := s[len(s)-1:]
-             counter1, err =  strconv.Atoi(lastByByte)
+             counter2, err =  strconv.Atoi(lastByByte)
  		if err != nil {
      			return  nil,err
   	         }
 	
    	  } else {
-             counter1 = 0
-    	   }*/
+             counter2 = 0
+    	   }
    
-       counter = counter+1;
+       counter = counter2+1;
 	
 	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
