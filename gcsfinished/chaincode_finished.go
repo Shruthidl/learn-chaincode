@@ -335,7 +335,7 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
    
        counter = counter2+1;
 	
-	counter_s := strconv.Itoa(2)
+	counter_s := strconv.Itoa(counter)
 	acq_name,err :=stub.GetState(args[0])
 	stringslice1 = append(stringslice1,args[2],args[1],args[3],args[4],string(acq_name),"In Process");
 	
