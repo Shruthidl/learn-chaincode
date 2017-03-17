@@ -77,10 +77,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		fmt.Println("**** First argument in addInClearFile:****" + args[0])
 		return t.addInClearFile(stub, args)
 	} else if function == "markTxnCleared" {
-		fmt.Println("**** First argument in markTxnCleared:***" + args[0])
+		fmt.Println("**** First argument in markTxnCleared:****" + args[0])
 		return t.markTxnCleared(stub, args)
 	} else if function == "markFilesCleared" {
-		fmt.Println("**** First argument in markFilesCleared:***" + args[0])
+		fmt.Println("**** First argument in markFilesCleared:****" + args[0])
 		return t.markFilesCleared(stub, args)
 	} 
 	
@@ -322,7 +322,7 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 	valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
         s:=string(valAsbytes);
 	
-  /*  if len(s) != 0 {
+     /*if len(s) != 0 {
 	     lastByByte := s[len(s)-1:]
              counter1, err =  strconv.Atoi(lastByByte)
  		if err != nil {
@@ -331,8 +331,7 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 	
    	  } else {
              counter1 = 0
-    	   }
-*/
+    	   }*/
    
        counter = counter+1;
 	
@@ -431,3 +430,76 @@ func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, arg
 	  s2= append(s2[:8], s2[8+1:]...)	
 	  s = strings.Join(s2, "|") 
 	  list =append(list,s);
+	}
+
+	listByte := strings.Join(list, ",");
+	
+	return []byte(listByte), nil;
+        
+    }
+
+// Return all transactions
+    func (t *SimpleChaincode) getAlltxns (stub shim.ChaincodeStubInterface, args []string) ([]byte,error) {
+     
+    	var list []string;
+	
+	for i := 1; i <=txncounter; i++ {
+	 valueAsBytes , err := stub.GetState("t"+strconv.Itoa(i));
+	if err != nil {
+	 return nil,err	
+	}
+	  s:=string(valueAsBytes);
+	  list =append(list,s);
+	}
+
+	txnsByte := strings.Join(list, ",");
+	
+	return []byte(txnsByte), nil;
+        
+    }
+
+
+// Return getCurrentFileId
+   func (t *SimpleChaincode) getCurrentFileId (stub shim.ChaincodeStubInterface, args []string)([]byte,error){
+	   
+	   return []byte(strconv.Itoa(counter)),nil;
+}
+
+
+// Return count
+func (t *SimpleChaincode) getCounts(stub shim.ChaincodeStubInterface, args []string)([]byte,error){
+       
+	        var str bytes.Buffer;
+		str.WriteString("Files:");
+                str.WriteString(strconv.Itoa(counter));
+	        str.WriteString(",");
+	        str.WriteString("Txns:");
+                str.WriteString(strconv.Itoa(txncounter));
+	        return []byte(str.String()),nil;
+    }
+
+ 
+
+// read - query function to read key/value pair
+func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	var jsonResp string
+	var err error
+
+	if len(args) != 1 {
+		return nil, errors.New("Incorrect number of arguments. Expecting name of the key to query")
+	}
+
+	key = args[0]
+	
+	fmt.Println("retrieving state for key: " + key);
+	
+	valAsbytes, err := stub.GetState(key)
+	if err != nil {
+		jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
+		return nil, errors.New(jsonResp)
+	}
+
+        //valAsbytes = []byte(valAsbytes);
+	return valAsbytes, nil
+}
+
