@@ -227,11 +227,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
 				return nil, err
 			}
 	
-		/*err = stub.PutState("counter", []byte(s_requester));
-			if err != nil {
-				return nil, err
-			}*/
-	
+		
 	
 	//enrich data
 	content := strings.Split(args[7], ",");
@@ -325,7 +321,6 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 	}
 	
 	valAsbytes,err :=stub.GetState(strconv.Itoa(counter))
-	//valAsbytes,err :=stub.GetState("counter")
         s:=string(valAsbytes);
 	
         if len(s) != 0 {
@@ -354,10 +349,7 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 			if err != nil {
 				return nil, err
 			}
-	       /*err = stub.PutState("counter", []byte(s_requester));
-			if err != nil {
-				return nil, err
-			}*/
+	    
 	  return nil, nil
 }
 
