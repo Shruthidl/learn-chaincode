@@ -70,16 +70,16 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	} else if function == "write" {
 		return t.write(stub, args)
 	} else if function == "addOutClearFile" {
-		fmt.Println("**** First argument in addOutClearFile:***" + args[0])
+		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
 		return t.addOutClearFile(stub, args)
 	} else if function == "addInClearFile" {
-		fmt.Println("**** First argument in addInClearFile:***" + args[0])
+		fmt.Println("**** First argument in addInClearFile:****" + args[0])
 		return t.addInClearFile(stub, args)
 	} else if function == "markTxnCleared" {
-		fmt.Println("**** First argument in markTxnCleared:***" + args[0])
+		fmt.Println("**** First argument in markTxnCleared:****" + args[0])
 		return t.markTxnCleared(stub, args)
 	} else if function == "markFilesCleared" {
-		fmt.Println("**** First argument in markFilesCleared:***" + args[0])
+		fmt.Println("**** First argument in markFilesCleared:****" + args[0])
 		return t.markFilesCleared(stub, args)
 	} 
 	
