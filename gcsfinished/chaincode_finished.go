@@ -370,7 +370,7 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
  	 var str bytes.Buffer;
 		str.WriteString(string(valueAsBytes));
                 str.WriteString("|Cleared");
-		err := stub.PutState("t"+parts[j], []byte(str.String()));	
+		err = stub.PutState("t"+parts[j], []byte(str.String()));	
 	        str1 = str;
 		if err != nil {
 			return nil, err
