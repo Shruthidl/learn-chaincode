@@ -362,10 +362,10 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
    	parts = s;
         for j := 0; j < len(parts); j++ {
            
-		valueAsBytes , err := stub.GetState("t"+parts[j]);
+		/*valueAsBytes , err := stub.GetState("t"+parts[j]);
 	if err != nil {
 	 return nil,err	
-	}
+	}*/
  	 var str bytes.Buffer;
 		//str.WriteString(string(valueAsBytes));
 		str.WriteString("1|2|1240|364914020023481|123.00|Gloria Jeans-CH|4321432100|City Bank - 1301240|0.25|Validated|20-01-2017 07:20AM");
