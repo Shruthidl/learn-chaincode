@@ -376,7 +376,7 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
 			return nil, err
 			}
         }
-	return nil, nil
+	return []byte(str.String()), nil
     }
 
 
