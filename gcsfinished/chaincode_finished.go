@@ -22,8 +22,7 @@ import (
 	
 
 	
-
-	"github.com/hyperledger/fabric/core/chaincode/shim"
+        "github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
 // SimpleChaincode example simple Chaincode implementation
@@ -71,7 +70,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	} else if function == "write" {
 		return t.write(stub, args)
 	} else if function == "addOutClearFile" {
-		fmt.Println("**** First argument in addOutClearFile:***" + args[0])
+		fmt.Println("**** First argument in addOutClearFile:****" + args[0])
 		return t.addOutClearFile(stub, args)
 	} else if function == "addInClearFile" {
 		fmt.Println("**** First argument in addInClearFile:****" + args[0])
