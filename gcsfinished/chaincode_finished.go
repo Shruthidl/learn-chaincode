@@ -251,6 +251,7 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
           buffer.WriteString(strconv.Itoa(counter));
           buffer.WriteString("|");
           buffer.WriteString(cont[i]);	
+	   buffer.WriteString("|");
 	  status := "Validated|20-01-2017 07:20AM";	
 	 if(strings.HasPrefix(parts1[0], "1240")){
          status = "Validated|20-01-2017 07:20AM";
@@ -271,9 +272,11 @@ func (t *SimpleChaincode) addOutClearFile(stub shim.ChaincodeStubInterface, args
         }
 	
                fmt.Println(card);
+	         
 		 cardname,err :=stub.GetState(card)
-		 cardname1,err :=stub.GetState(parts1[0])
+		 cardname1,err :=stub.GetState(parts1[4])
 		buffer.WriteString(string(cardname));
+	   	buffer.WriteString("|");
 	        buffer.WriteString(string(cardname1));
 		buffer.WriteString("|0.25|");
 		buffer.WriteString(status);
