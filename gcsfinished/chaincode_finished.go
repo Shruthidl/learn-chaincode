@@ -360,7 +360,6 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 // mark transaction cleared
 func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
         var s = args;
-	//s := strings.Split(args[0], ",");
 	var str1 bytes.Buffer;
         var mCount int = len(s);
         parts  := make([]string, mCount );
@@ -387,7 +386,6 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
 //mark files cleared
 func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
 	var s = args;
-	//s := strings.Split(args[0], ",");
         var mCount int = len(s);
         parts  := make([]string, mCount );
    	parts = s;
