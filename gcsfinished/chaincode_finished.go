@@ -57,7 +57,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, err
 	}
 
-	return nil, nil
+	return nil, nil;
 }
 
 // Invoke isur entry point to invoke a chaincode function
