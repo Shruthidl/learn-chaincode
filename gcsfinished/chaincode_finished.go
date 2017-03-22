@@ -505,5 +505,5 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	}
 
         //valAsbytes = []byte(valAsbytes);
-	return valAsbytes, nil
+	return valAsbytes, nil;
 }
