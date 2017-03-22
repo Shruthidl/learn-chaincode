@@ -8,7 +8,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License test. 
+limitations under the License.
 */
 
 package main
@@ -359,8 +359,7 @@ func (t *SimpleChaincode) addInClearFile(stub shim.ChaincodeStubInterface, args 
 
 // mark transaction cleared
 func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
-        //var s = args;
-	var s = strings.Split(args[0], ",");
+        var s = args;
 	var str1 bytes.Buffer;
         var mCount int = len(s);
         parts  := make([]string, mCount );
@@ -386,8 +385,7 @@ func (t *SimpleChaincode) markTxnCleared(stub shim.ChaincodeStubInterface, args 
 
 //mark files cleared
 func (t *SimpleChaincode) markFilesCleared(stub shim.ChaincodeStubInterface, args []string) ([]byte,error){
-	//var s = args;
-	var s = strings.Split(args[0], ",");
+	var s = args;
         var mCount int = len(s);
         parts  := make([]string, mCount );
    	parts = s;
@@ -509,4 +507,3 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
         //valAsbytes = []byte(valAsbytes);
 	return valAsbytes, nil
 }
-
